@@ -94,13 +94,17 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="kdroid27&#39;Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="模块化是指把一个复杂的系统分解到一个一个的模块。 模块化开发的优点：(1)代码复用，让我们更方便地进行代码管理、同时也便于后面代码的修改和维护。 (2)一个单独的文件就是一个模块，是一个单独的作用域，只向外暴露特定的变量和函数。这样可以避免污染全局变量，减少变量命名冲突。 js模块化规范有：CommonJS、AMD、CMD、ES6的模块系统。本文将依次介绍下每个规范。 一、早期：用script来引">
+<meta property="og:type" content="article">
+<meta property="og:title" content="js模块化发展历程">
+<meta property="og:url" content="http://yoursite.com/2018/12/06/js模块化发展历程/index.html">
 <meta property="og:site_name" content="kdroid27&#39;Blog">
+<meta property="og:description" content="模块化是指把一个复杂的系统分解到一个一个的模块。 模块化开发的优点：(1)代码复用，让我们更方便地进行代码管理、同时也便于后面代码的修改和维护。 (2)一个单独的文件就是一个模块，是一个单独的作用域，只向外暴露特定的变量和函数。这样可以避免污染全局变量，减少变量命名冲突。 js模块化规范有：CommonJS、AMD、CMD、ES6的模块系统。本文将依次介绍下每个规范。 一、早期：用script来引">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-06T14:45:57.302Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="kdroid27&#39;Blog">
+<meta name="twitter:title" content="js模块化发展历程">
+<meta name="twitter:description" content="模块化是指把一个复杂的系统分解到一个一个的模块。 模块化开发的优点：(1)代码复用，让我们更方便地进行代码管理、同时也便于后面代码的修改和维护。 (2)一个单独的文件就是一个模块，是一个单独的作用域，只向外暴露特定的变量和函数。这样可以避免污染全局变量，减少变量命名冲突。 js模块化规范有：CommonJS、AMD、CMD、ES6的模块系统。本文将依次介绍下每个规范。 一、早期：用script来引">
 
 
 
@@ -108,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2018/12/06/js模块化发展历程/">
 
 
 
@@ -118,7 +122,7 @@
   };
 </script>
 
-  <title>kdroid27'Blog</title>
+  <title>js模块化发展历程 | kdroid27'Blog</title>
   
 
 
@@ -166,8 +170,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -205,7 +208,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -265,9 +268,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -299,10 +302,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/12/06/js模块化发展历程/" class="post-title-link" itemprop="url">js模块化发展历程</a>
+          <h1 class="post-title" itemprop="name headline">js模块化发展历程
+
               
             
           </h1>
@@ -379,9 +380,7 @@
       
 
       
-        
-          
-            <p>模块化是指把一个复杂的系统分解到一个一个的模块。</p>
+        <p>模块化是指把一个复杂的系统分解到一个一个的模块。</p>
 <h4 id="模块化开发的优点："><a href="#模块化开发的优点：" class="headerlink" title="模块化开发的优点："></a>模块化开发的优点：</h4><p>(1)代码复用，让我们更方便地进行代码管理、同时也便于后面代码的修改和维护。</p>
 <p>(2)一个单独的文件就是一个模块，是一个单独的作用域，只向外暴露特定的变量和函数。这样可以避免污染全局变量，减少变量命名冲突。</p>
 <p>js模块化规范有：CommonJS、AMD、CMD、ES6的模块系统。本文将依次介绍下每个规范。</p>
@@ -450,8 +449,6 @@
 <h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>浏览器还没有完全兼容，必须通过工具转换成标准的 ES5 后才能正常运行。</p>
 <h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>本文从script引入js文件讲起，到服务器端模块的规范CommonJs，再到推崇依赖前置的浏览器端模块的规范AMD、推崇依赖就近的浏览器端模块的规范CMD，最后介绍了ES6的模块化。每个介绍中都有各规范基本的用法和一个示例。如有问题，欢迎指正。</p>
 
-          
-        
       
     </div>
 
@@ -474,180 +471,28 @@
       
 
       
-
-      
-
       
       
-        <div class="post-eof"></div>
+
       
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/06/hello-world/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kwongdroid">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="kdroid27'Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/06/06/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
-              
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-06-06 21:26:16" itemprop="dateCreated datePublished" datetime="2018-06-06T21:26:16+08:00">2018-06-06</time>
-            </span>
-          
-
-          
+              <a href="/2018/06/06/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
             
+          </div>
 
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-06 22:48:46" itemprop="dateModified" datetime="2019-07-06T22:48:46+08:00">2019-07-06</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -657,14 +502,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -684,8 +530,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -731,6 +586,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#模块化开发的优点："><span class="nav-number">1.</span> <span class="nav-text">模块化开发的优点：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#一、早期：用script来引入js模块"><span class="nav-number">2.</span> <span class="nav-text">一、早期：用script来引入js模块</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点："><span class="nav-number">2.1.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#二、CommonJS-规范"><span class="nav-number">3.</span> <span class="nav-text">二、CommonJS 规范</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点：-1"><span class="nav-number">3.1.</span> <span class="nav-text">缺点：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#三、AMD和require-js"><span class="nav-number">4.</span> <span class="nav-text">三、AMD和require.js</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#四、CMD和sea-js"><span class="nav-number">5.</span> <span class="nav-text">四、CMD和sea.js</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#CMD与AMD的不同的在于："><span class="nav-number">5.1.</span> <span class="nav-text">CMD与AMD的不同的在于：</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#五、ES6模块化"><span class="nav-number">6.</span> <span class="nav-text">五、ES6模块化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#缺点"><span class="nav-number">6.1.</span> <span class="nav-text">缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">7.</span> <span class="nav-text">小结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -860,6 +732,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -875,6 +751,8 @@
 
   
 
+
+  
 
 
   
