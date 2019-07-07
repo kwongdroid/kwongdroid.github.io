@@ -102,12 +102,14 @@
 <meta property="og:site_name" content="落魄的前端开发">
 <meta property="og:description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://kwongdroid.github.io/.io//1.png">
-<meta property="og:updated_time" content="2019-07-07T14:53:50.977Z">
+<meta property="og:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png">
+<meta property="og:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/2.png">
+<meta property="og:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/3.png">
+<meta property="og:updated_time" content="2019-07-07T15:42:23.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OffscreenCanvas - 使用Web Worker加速您的Canvas操作">
 <meta name="twitter:description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
-<meta name="twitter:image" content="https://kwongdroid.github.io/.io//1.png">
+<meta name="twitter:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png">
 
 
 
@@ -240,7 +242,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">5</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">6</span></a>
 
   </li>
         
@@ -258,7 +260,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">2</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">3</span></a>
 
   </li>
         
@@ -276,7 +278,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">3</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">4</span></a>
 
   </li>
 
@@ -478,9 +480,10 @@
 <p>OffscreenCanvas是可转让的。除了将其指定为消息中的字段之外，还需要将其作为postMessage（转移）中的第二个参数传递，以便可以在Worker上下文中使用它。</p>
 </blockquote>
 <p>在下面的示例中，当颜色主题发生变化时会发生“繁重计算” - 即使在快速桌面上也应该花费几毫秒。您可以选择在主线程或Worker线程上运行动画。在主线程的情况下，当繁重的任务运行时，您无法与按钮交互 - 线程被阻止。对于Worker，对UI响应性没有影响。</p>
-<p><img src="/.io//1.png" alt></p>
+<p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/keep-ui-responsive.html" target="_blank" rel="noopener">示例：keep-ui-responsive</a></p>
 <p>它也是另一种方式：繁忙的主线程不会影响在worker上运行的动画。尽管有主要的线程流量，您仍可以使用此功能来避免视觉抖动并保证流畅的动画：</p>
+<p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/2.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/index.html" target="_blank" rel="noopener">示例</a></p>
 <p>在常规画布的情况下，当主线程被人为地过度工作时动画停止，而基于Worker的OffscreenCanvas播放顺利。</p>
 <h2 id="与流行的库一起使用"><a href="#与流行的库一起使用" class="headerlink" title="与流行的库一起使用"></a>与流行的库一起使用</h2><p>由于OffscreenCanvas API通常与常规Canvas元素兼容，因此您可以轻松地将其用作渐进增强功能，也可以使用市场上的一些领先图形库。</p>
@@ -489,6 +492,7 @@
 
 <p>这里的问题是Three.js希望canvas具有style.width和style.height属性。OffscreenCanvas，与DOM完全分离，没有它，因此您需要自己提供它，或者通过将其删除或提供将这些值与原始画布尺寸相关联的逻辑。</p>
 <p>这是一个如何在worker中运行基本Three.js动画的演示：</p>
+<p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/3.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/use-with-lib.html" target="_blank" rel="noopener">示例：use-with-lib</a></p>
 <p>请记住，某些与DOM相关的API在Worker中并不容易获得，因此如果您想使用更高级的Three.js功能（如纹理），则可能需要更多变通方法。</p>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果您大量使用画布的图形功能，OffscreenCanvas可以积极影响您的应用程序的性能。使工作人员可以使用画布渲染上下文增加了Web应用程序的并行性，并更好地利用了多核系统。</p>
@@ -637,7 +641,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -658,7 +662,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
+                      
+                    
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -685,7 +691,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">5</span>
+                      
+                    
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
