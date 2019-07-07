@@ -234,7 +234,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">3</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">5</span></a>
 
   </li>
         
@@ -252,7 +252,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">1</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">2</span></a>
 
   </li>
         
@@ -270,7 +270,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">2</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">3</span></a>
 
   </li>
 
@@ -679,6 +679,195 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/" class="post-title-link" itemprop="url">OffscreenCanvas - 使用Web Worker加速您的Canvas操作</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-08-21 22:08:11" itemprop="dateCreated datePublished" datetime="2018-08-21T22:08:11+08:00">2018-08-21</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/性能优化/" itemprop="url" rel="index"><span itemprop="name">性能优化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>现在，您可以使用OffscreenCanvas从主线程渲染图形！</p>
+<p>Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。</p>
+<p>它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。</p>
+<p>同时，在现代网站中，脚本执行是用户响应问题最常见的 来源之一。因为画布逻辑和渲染发生在与用户交互相同的线程上，动画中涉及的（有时很重）计算会损害应用程序的真实和感知性能。</p>
+<p>幸运的是，OffscreenCanvas 是对这种威胁的回应！</p>
+<p>到目前为止，画布绘制功能与<code>&lt;canvas&gt;</code>元素绑定，这意味着它直接取决于DOM。顾名思义，OffscreenCanvas通过将其移出屏幕来解耦DOM和Canvas API。</p>
+<p>由于这种解耦，OffscreenCanvas的渲染与DOM完全分离，因此在常规画布上提供了一些速度提升，因为两者之间没有同步。但更重要的是，它可以在Web Worker中使用，即使没有可用的DOM。这可以实现各种有趣的用例。</p>
+<h2 id="在Worker中使用OffscreenCanvas"><a href="#在Worker中使用OffscreenCanvas" class="headerlink" title="在Worker中使用OffscreenCanvas"></a>在Worker中使用OffscreenCanvas</h2><p>Worker 是网络的线程版本 - 它们允许您在后台运行任务。将一些脚本移动到Worker可以为应用程序提供更多空间，以便在主线程上执行用户关键任务。到目前为止，没有办法在Worker中使用Canvas API，因为没有可用的DOM。</p>
+<p>OffscreenCanvas不依赖于DOM，因此可以使用它。在这里，我使用OffscreenCanvas来计算worker中的渐变颜色：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: worker.js</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getGradientColor</span>(<span class="params">percent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> canvas = <span class="keyword">new</span> OffscreenCanvas(<span class="number">100</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">const</span> gradient = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, canvas.width, <span class="number">0</span>);</span><br><span class="line">    gradient.addColorStop(<span class="number">0</span>, <span class="string">'red'</span>);</span><br><span class="line">    gradient.addColorStop(<span class="number">1</span>, <span class="string">'blue'</span>);</span><br><span class="line">    ctx.fillStyle = gradient;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> imgd = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> colors = imgd.data.slice(percent * <span class="number">4</span>, percent * <span class="number">4</span> + <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;colors[<span class="number">0</span>]&#125;</span>, <span class="subst">$&#123;colors[<span class="number">1</span>]&#125;</span>, <span class="subst">$&#123;colors[<span class="number">2</span>]&#125;</span>, <span class="subst">$&#123;colors[])<span class="string">`;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">getGradientColor(40);  // rgba(152, 0, 104, 255 )</span></span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="取消阻止主线程"><a href="#取消阻止主线程" class="headerlink" title="取消阻止主线程"></a>取消阻止主线程</h2><p>将大量计算移动到Worker时，可以释放主线程上的大量资源，这会变得更加有趣。我们可以使用transferControlToOffscreen 方法将常规画布镜像到OffscreenCanvas实例。应用于OffscreenCanvas的操作将自动在源画布上呈现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offscreen = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>).transferControlToOffscreen();</span><br><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'myworkerurl.js'</span>);</span><br><span class="line">worker.postMessage(&#123; <span class="attr">canvas</span>: offscreen &#125;, [offscreen]);</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>OffscreenCanvas是可转让的。除了将其指定为消息中的字段之外，还需要将其作为postMessage（转移）中的第二个参数传递，以便可以在Worker上下文中使用它。</p>
+</blockquote>
+<p>在下面的示例中，当颜色主题发生变化时会发生“繁重计算” - 即使在快速桌面上也应该花费几毫秒。您可以选择在主线程或Worker线程上运行动画。在主线程的情况下，当繁重的任务运行时，您无法与按钮交互 - 线程被阻止。对于Worker，对UI响应性没有影响。</p>
+<p><img src="/.io//1.png" alt="1"></p>
+<p><a href="https://devnook.github.io/OffscreenCanvasDemo/keep-ui-responsive.html" target="_blank" rel="noopener">示例：keep-ui-responsive</a></p>
+<p>它也是另一种方式：繁忙的主线程不会影响在worker上运行的动画。尽管有主要的线程流量，您仍可以使用此功能来避免视觉抖动并保证流畅的动画：</p>
+<p><a href="https://devnook.github.io/OffscreenCanvasDemo/index.html" target="_blank" rel="noopener">示例</a></p>
+<p>在常规画布的情况下，当主线程被人为地过度工作时动画停止，而基于Worker的OffscreenCanvas播放顺利。</p>
+<h2 id="与流行的库一起使用"><a href="#与流行的库一起使用" class="headerlink" title="与流行的库一起使用"></a>与流行的库一起使用</h2><p>由于OffscreenCanvas API通常与常规Canvas元素兼容，因此您可以轻松地将其用作渐进增强功能，也可以使用市场上的一些领先图形库。</p>
+<p>例如，您可以对其进行功能检测，如果可用，通过在渲染器构造函数中指定canvas选项将其与Three.js一起使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvasEl = <span class="built_in">document</span>.querySelector(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> canvas = (<span class="string">'OffscreenCanvas'</span> <span class="keyword">in</span> <span class="built_in">window</span>) ? canvasEl.transferControlToOffscreen() : canvasEl;</span><br><span class="line">canvas.style = &#123; <span class="attr">width</span>: <span class="number">0</span>, <span class="attr">height</span>: <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123; <span class="attr">canvas</span>: canvas &#125;);</span><br></pre></td></tr></table></figure>
+
+<p>这里的问题是Three.js希望canvas具有style.width和style.height属性。OffscreenCanvas，与DOM完全分离，没有它，因此您需要自己提供它，或者通过将其删除或提供将这些值与原始画布尺寸相关联的逻辑。</p>
+<p>这是一个如何在worker中运行基本Three.js动画的演示：</p>
+<p><a href="https://devnook.github.io/OffscreenCanvasDemo/use-with-lib.html" target="_blank" rel="noopener">示例：use-with-lib</a></p>
+<p>请记住，某些与DOM相关的API在Worker中并不容易获得，因此如果您想使用更高级的Three.js功能（如纹理），则可能需要更多变通方法。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果您大量使用画布的图形功能，OffscreenCanvas可以积极影响您的应用程序的性能。使工作人员可以使用画布渲染上下文增加了Web应用程序的并行性，并更好地利用了多核系统。</p>
+<p>OffscreenCanvas在Chrome 69中没有标记。它也在 Firefox 中开发。由于其API与常规canvas元素非常一致，因此您可以轻松地对其进行特征检测并将其用作渐进增强，而不会破坏现有的应用程序或库逻辑。它在图形和动画与画布周围的DOM紧密相关的所有情况下都具有性能优势。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -723,7 +912,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -742,7 +931,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">1</span>
+                      
+                    
+                    <span class="site-state-item-count">2</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -765,7 +956,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
