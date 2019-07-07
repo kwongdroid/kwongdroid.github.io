@@ -980,7 +980,7 @@
 <li>一种是主线程从当前 DOM 树中的 Canvas 元素产生一个 OffscreenCanvas，再把这个 OffscreenCanvas 发送给 Worker 线程进行渲染，渲染的结果直接 Commit 到浏览器的 Display Compositor 输出到当前窗口，相当于在 Worker 线程直接更新 Canvas 元素的内容；</li>
 </ol>
 <p>我自己把第一种使用方式称之为 Transfer 模式，第二种使用方式称之为 Commit 模式。</p>
-<h2 id="Transfer-模式"><a href="#Transfer-模式" class="headerlink" title="Transfer 模式"></a>Transfer 模式</h2><p><img src="/1.jpg" alt></p>
+<h2 id="Transfer-模式"><a href="#Transfer-模式" class="headerlink" title="Transfer 模式"></a>Transfer 模式</h2><p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-概念说明及使用解析/1.jpg" alt></p>
 <blockquote>
 <p>Transfer Demo，使用 Transfer 模式</p>
 </blockquote>
