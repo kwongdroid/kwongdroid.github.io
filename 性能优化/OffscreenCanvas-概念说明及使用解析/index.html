@@ -94,13 +94,20 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="落魄的前端开发">
-<meta property="og:url" content="https://kwongdroid.github.io/index.html">
+  <meta name="description" content="OffscreenCanvas 是一个实验中的新特性，主要用于提升 Canvas 2D/3D 绘图应用和 H5 游戏的渲染性能和使用体验。OffscreenCanvas 的 API 很简单，但是要真正掌握好如何使用，需要页端对浏览器内部的一些运作机制有较深入的了解，这也是撰写本文的目的。 跟 OffscreenCanvas 关系比较紧密的还有另外两个新的 API，ImageBitmap 和 Ima">
+<meta name="keywords" content="Canvas,OffscreenCanvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OffscreenCanvas - 概念说明及使用解析">
+<meta property="og:url" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-概念说明及使用解析/index.html">
 <meta property="og:site_name" content="落魄的前端开发">
+<meta property="og:description" content="OffscreenCanvas 是一个实验中的新特性，主要用于提升 Canvas 2D/3D 绘图应用和 H5 游戏的渲染性能和使用体验。OffscreenCanvas 的 API 很简单，但是要真正掌握好如何使用，需要页端对浏览器内部的一些运作机制有较深入的了解，这也是撰写本文的目的。 跟 OffscreenCanvas 关系比较紧密的还有另外两个新的 API，ImageBitmap 和 Ima">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://kwongdroid.github.io/1.jpg">
+<meta property="og:updated_time" content="2019-07-07T16:39:36.654Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="落魄的前端开发">
+<meta name="twitter:title" content="OffscreenCanvas - 概念说明及使用解析">
+<meta name="twitter:description" content="OffscreenCanvas 是一个实验中的新特性，主要用于提升 Canvas 2D/3D 绘图应用和 H5 游戏的渲染性能和使用体验。OffscreenCanvas 的 API 很简单，但是要真正掌握好如何使用，需要页端对浏览器内部的一些运作机制有较深入的了解，这也是撰写本文的目的。 跟 OffscreenCanvas 关系比较紧密的还有另外两个新的 API，ImageBitmap 和 Ima">
+<meta name="twitter:image" content="https://kwongdroid.github.io/1.jpg">
 
 
 
@@ -108,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://kwongdroid.github.io/">
+  <link rel="canonical" href="https://kwongdroid.github.io/性能优化/OffscreenCanvas-概念说明及使用解析/">
 
 
 
@@ -118,7 +125,7 @@
   };
 </script>
 
-  <title>落魄的前端开发</title>
+  <title>OffscreenCanvas - 概念说明及使用解析 | 落魄的前端开发</title>
   
 
 
@@ -166,8 +173,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -205,7 +211,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -341,511 +347,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/前端笔记/js模块化发展历程/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kwongdroid">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落魄的前端开发">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/前端笔记/js模块化发展历程/" class="post-title-link" itemprop="url">js模块化发展历程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-12-06 22:06:33" itemprop="dateCreated datePublished" datetime="2018-12-06T22:06:33+08:00">2018-12-06</time>
-            </span>
-          
-
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端笔记/" itemprop="url" rel="index"><span itemprop="name">前端笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>模块化是指把一个复杂的系统分解到一个一个的模块。</p>
-<h4 id="模块化开发的优点："><a href="#模块化开发的优点：" class="headerlink" title="模块化开发的优点："></a>模块化开发的优点：</h4><p>(1)代码复用，让我们更方便地进行代码管理、同时也便于后面代码的修改和维护。</p>
-<p>(2)一个单独的文件就是一个模块，是一个单独的作用域，只向外暴露特定的变量和函数。这样可以避免污染全局变量，减少变量命名冲突。</p>
-<p>js模块化规范有：CommonJS、AMD、CMD、ES6的模块系统。本文将依次介绍下每个规范。</p>
-<h4 id="一、早期：用script来引入js模块"><a href="#一、早期：用script来引入js模块" class="headerlink" title="一、早期：用script来引入js模块"></a>一、早期：用script来引入js模块</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"a.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"b.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"c.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"d.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h5 id="缺点："><a href="#缺点：" class="headerlink" title="缺点："></a>缺点：</h5><p>(1)加载的时候会停止渲染网页，引入的js文件越多，网页失去响应的时间越长；</p>
-<p>(2)会污染全局变量；</p>
-<p>(3)js文件之间存在依赖关系，加载是有顺序的，依赖性最大的要放到最后去加载；当项目规模较大时，依赖关系变得错综复杂。</p>
-<p>(4)要引入的js文件太多，不美观，代码难以管理。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/前端笔记/js模块化发展历程/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/博客搭建/使用hexo-asset-image插件引用本地图片无法显示/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kwongdroid">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落魄的前端开发">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/博客搭建/使用hexo-asset-image插件引用本地图片无法显示/" class="post-title-link" itemprop="url">使用hexo-asset-image插件引用本地图片无法显示</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-11-02 19:19:58" itemprop="dateCreated datePublished" datetime="2018-11-02T19:19:58+08:00">2018-11-02</time>
-            </span>
-          
-
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/博客搭建/" itemprop="url" rel="index"><span itemprop="name">博客搭建</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h4 id="启用文章资源文件夹功能："><a href="#启用文章资源文件夹功能：" class="headerlink" title="启用文章资源文件夹功能："></a>启用文章资源文件夹功能：</h4><blockquote>
-<p>1.修改站点配置文件_config.yml：<code>post_asset_folder: true</code></p>
-<p>2.安装一个可以上传本地图片的插件：<code>npm install hexo-asset-image --save</code></p>
-<p>3.以后使用<code>hexo new &#39;xxxx&#39;</code>来生成md博文时，/source/_posts文件夹内除了xxxx.md文件还有一个同名的文件夹</p>
-<p>4.当我们在xxxx.md中想引入图片时，先把图片复制到xxxx这个文件夹中，然后只需要在xxxx.md中按照markdown的格式引入图片：<code>![](图片名.jpg)</code></p>
-</blockquote>
-<p>在文章里面插入图片，<code>hexo g</code>生成的时候总会在图片前面插一个.io，<code>hexo s</code>运行后图片并没有正常显示出来，在网上查找后发现是hexo-asset-image这个插件的bug，hexo版本3.0以上获取网站url的方式与3.0以下有些不同。</p>
-<h4 id="解决办法："><a href="#解决办法：" class="headerlink" title="解决办法："></a>解决办法：</h4><p>打开/node_modules/hexo-asset-image/index.js，将内容更换为下面的代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">'use strict'</span>;</span><br><span class="line"><span class="keyword">var</span> cheerio = <span class="built_in">require</span>(<span class="string">'cheerio'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// http://stackoverflow.com/questions/14480345/how-to-get-the-nth-occurrence-in-a-string</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getPosition</span>(<span class="params">str, m, i</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> str.split(m, i).join(m).length;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> version = <span class="built_in">String</span>(hexo.version).split(<span class="string">'.'</span>);</span><br><span class="line">hexo.extend.filter.register(<span class="string">'after_post_render'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> config = hexo.config;</span><br><span class="line">  <span class="keyword">if</span>(config.post_asset_folder)&#123;</span><br><span class="line">    	<span class="keyword">var</span> link = data.permalink;</span><br><span class="line">	<span class="keyword">if</span>(version.length &gt; <span class="number">0</span> &amp;&amp; <span class="built_in">Number</span>(version[<span class="number">0</span>]) == <span class="number">3</span>)</span><br><span class="line">	   <span class="keyword">var</span> beginPos = getPosition(link, <span class="string">'/'</span>, <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	   <span class="keyword">var</span> beginPos = getPosition(link, <span class="string">'/'</span>, <span class="number">3</span>) + <span class="number">1</span>;</span><br><span class="line">	<span class="comment">// In hexo 3.1.1, the permalink of "about" page is like ".../about/index.html".</span></span><br><span class="line">	<span class="keyword">var</span> endPos = link.lastIndexOf(<span class="string">'/'</span>) + <span class="number">1</span>;</span><br><span class="line">    link = link.substring(beginPos, endPos);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> toprocess = [<span class="string">'excerpt'</span>, <span class="string">'more'</span>, <span class="string">'content'</span>];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; toprocess.length; i++)&#123;</span><br><span class="line">      <span class="keyword">var</span> key = toprocess[i];</span><br><span class="line"> </span><br><span class="line">      <span class="keyword">var</span> $ = cheerio.load(data[key], &#123;</span><br><span class="line">        ignoreWhitespace: <span class="literal">false</span>,</span><br><span class="line">        xmlMode: <span class="literal">false</span>,</span><br><span class="line">        lowerCaseTags: <span class="literal">false</span>,</span><br><span class="line">        decodeEntities: <span class="literal">false</span></span><br><span class="line">      &#125;);</span><br><span class="line"></span><br><span class="line">      $(<span class="string">'img'</span>).each(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">		<span class="keyword">if</span> ($(<span class="keyword">this</span>).attr(<span class="string">'src'</span>))&#123;</span><br><span class="line">			<span class="comment">// For windows style path, we replace '\' to '/'.</span></span><br><span class="line">			<span class="keyword">var</span> src = $(<span class="keyword">this</span>).attr(<span class="string">'src'</span>).replace(<span class="string">'\\'</span>, <span class="string">'/'</span>);</span><br><span class="line">			<span class="keyword">if</span>(!<span class="regexp">/http[s]*.*|\/\/.*/</span>.test(src) &amp;&amp;</span><br><span class="line">			   !<span class="regexp">/^\s*\//</span>.test(src)) &#123;</span><br><span class="line">			  <span class="comment">// For "about" page, the first part of "src" can't be removed.</span></span><br><span class="line">			  <span class="comment">// In addition, to support multi-level local directory.</span></span><br><span class="line">			  <span class="keyword">var</span> linkArray = link.split(<span class="string">'/'</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">elem</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> elem != <span class="string">''</span>;</span><br><span class="line">			  &#125;);</span><br><span class="line">			  <span class="keyword">var</span> srcArray = src.split(<span class="string">'/'</span>).filter(<span class="function"><span class="keyword">function</span>(<span class="params">elem</span>)</span>&#123;</span><br><span class="line">				<span class="keyword">return</span> elem != <span class="string">''</span> &amp;&amp; elem != <span class="string">'.'</span>;</span><br><span class="line">			  &#125;);</span><br><span class="line">			  <span class="keyword">if</span>(srcArray.length &gt; <span class="number">1</span>)</span><br><span class="line">				srcArray.shift();</span><br><span class="line">			  src = srcArray.join(<span class="string">'/'</span>);</span><br><span class="line">			  $(<span class="keyword">this</span>).attr(<span class="string">'src'</span>, config.root + link + src);</span><br><span class="line">			  <span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info(<span class="string">"update link as:--&gt;"</span>+config.root + link + src);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info(<span class="string">"no src attr, skipped..."</span>);</span><br><span class="line">			<span class="built_in">console</span>.info&amp;&amp;<span class="built_in">console</span>.info($(<span class="keyword">this</span>));</span><br><span class="line">		&#125;</span><br><span class="line">      &#125;);</span><br><span class="line">      data[key] = $.html();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/前端笔记/运行gulp项目报错：AssertionError-ERR-ASSERTION-Task-function-must-be-specified/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kwongdroid">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落魄的前端开发">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/前端笔记/运行gulp项目报错：AssertionError-ERR-ASSERTION-Task-function-must-be-specified/" class="post-title-link" itemprop="url">运行gulp项目报错：AssertionError [ERR_ASSERTION]: Task function must be specified</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-10-03 12:34:50" itemprop="dateCreated datePublished" datetime="2018-10-03T12:34:50+08:00">2018-10-03</time>
-            </span>
-          
-
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端笔记/" itemprop="url" rel="index"><span itemprop="name">前端笔记</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：<code>gulp</code> 出现了这个错误：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ gulp build</span><br><span class="line">assert.js:339</span><br><span class="line">    throw err;</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">AssertionError [ERR_ASSERTION]: Task <span class="keyword">function</span> must be specified</span><br><span class="line">    at Gulp.set [as _setTask] (E:\Documents\GitHub\blog\node_modules\undertaker\lib\<span class="built_in">set</span>-task.js:10:3)</span><br><span class="line">    at Gulp.task (E:\Documents\GitHub\blog\node_modules\undertaker\lib\task.js:13:8)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\Documents\GitHub\blog\gulpfile.js:43:6)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:776:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:690:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/前端笔记/运行gulp项目报错：AssertionError-ERR-ASSERTION-Task-function-must-be-specified/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
 
   
 
@@ -877,10 +381,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/性能优化/OffscreenCanvas-概念说明及使用解析/" class="post-title-link" itemprop="url">OffscreenCanvas - 概念说明及使用解析</a>
+          <h1 class="post-title" itemprop="name headline">OffscreenCanvas - 概念说明及使用解析
+
               
             
           </h1>
@@ -958,9 +460,7 @@
       
 
       
-        
-          
-            <p>OffscreenCanvas 是一个实验中的新特性，主要用于提升 Canvas 2D/3D 绘图应用和 H5 游戏的渲染性能和使用体验。OffscreenCanvas 的 API 很简单，但是要真正掌握好如何使用，需要页端对浏览器内部的一些运作机制有较深入的了解，这也是撰写本文的目的。</p>
+        <p>OffscreenCanvas 是一个实验中的新特性，主要用于提升 Canvas 2D/3D 绘图应用和 H5 游戏的渲染性能和使用体验。OffscreenCanvas 的 API 很简单，但是要真正掌握好如何使用，需要页端对浏览器内部的一些运作机制有较深入的了解，这也是撰写本文的目的。</p>
 <p>跟 OffscreenCanvas 关系比较紧密的还有另外两个新的 API，ImageBitmap 和 ImageBitmapRenderingContext，在文中也会一并进行讲解。</p>
 <blockquote>
 <p>目前 OffscreenCanvas 在最新版本的 Chrome 和 Firefox 上都可以通过实验室开关打开，Chrome 的开关是 chome://flags -&gt; Experimental Web Platform features，本文的例程是在 Chrome 67 Canary 上进行验证。<strong>OffscreenCanvas 的 API 在未来仍有可能会发生一些变化，本文会随之进行更新</strong>。</p>
@@ -1059,8 +559,6 @@
 <p>这两种方式各有其缺陷，都不是理想的选择。</p>
 <p>上面的例程展示了新的动画方式，gl.commit() 返回了一个 Promise 对象，它会在下一次 Begin Frame 时被 resolve，Begin Frame 基本上可以认为是浏览器环境下的 vSync 信号，浏览器会在 Begin Frame 的过程中调用 rAF 的回调，resolve Commit Promise。因为目前 Worker 线程并不支持 rAF，所以后者就是我们当前最好的选择。</p>
 
-          
-        
       
     </div>
 
@@ -1078,208 +576,72 @@
     
 
     
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>kwongdroid</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://kwongdroid.github.io/性能优化/OffscreenCanvas-概念说明及使用解析/" title="OffscreenCanvas - 概念说明及使用解析">https://kwongdroid.github.io/性能优化/OffscreenCanvas-概念说明及使用解析/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="kwongdroid">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="落魄的前端开发">
-    </span>
-
-    
-      <header class="post-header">
-
         
+          
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/" class="post-title-link" itemprop="url">OffscreenCanvas - 使用Web Worker加速您的Canvas操作</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
+        <div class="post-tags">
           
+            <a href="/tags/Canvas/" rel="tag"><i class="fa fa-tag"></i> Canvas</a>
           
+            <a href="/tags/OffscreenCanvas/" rel="tag"><i class="fa fa-tag"></i> OffscreenCanvas</a>
           
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-08-21 22:08:11" itemprop="dateCreated datePublished" datetime="2018-08-21T22:08:11+08:00">2018-08-21</time>
-            </span>
-          
-
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/性能优化/" itemprop="url" rel="index"><span itemprop="name">性能优化</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          <br>
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>现在，您可以使用OffscreenCanvas从主线程渲染图形！</p>
-<p>Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。</p>
-<p>它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。</p>
-<p>同时，在现代网站中，脚本执行是用户响应问题最常见的 来源之一。因为画布逻辑和渲染发生在与用户交互相同的线程上，动画中涉及的（有时很重）计算会损害应用程序的真实和感知性能。</p>
-<p>幸运的是，OffscreenCanvas 是对这种威胁的回应！</p>
-<p>到目前为止，画布绘制功能与<code>&lt;canvas&gt;</code>元素绑定，这意味着它直接取决于DOM。顾名思义，OffscreenCanvas通过将其移出屏幕来解耦DOM和Canvas API。</p>
-<p>由于这种解耦，OffscreenCanvas的渲染与DOM完全分离，因此在常规画布上提供了一些速度提升，因为两者之间没有同步。但更重要的是，它可以在Web Worker中使用，即使没有可用的DOM。这可以实现各种有趣的用例。</p>
-<h2 id="在Worker中使用OffscreenCanvas"><a href="#在Worker中使用OffscreenCanvas" class="headerlink" title="在Worker中使用OffscreenCanvas"></a>在Worker中使用OffscreenCanvas</h2><p>Worker 是网络的线程版本 - 它们允许您在后台运行任务。将一些脚本移动到Worker可以为应用程序提供更多空间，以便在主线程上执行用户关键任务。到目前为止，没有办法在Worker中使用Canvas API，因为没有可用的DOM。</p>
-<p>OffscreenCanvas不依赖于DOM，因此可以使用它。在这里，我使用OffscreenCanvas来计算worker中的渐变颜色：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: worker.js</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getGradientColor</span>(<span class="params">percent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> canvas = <span class="keyword">new</span> OffscreenCanvas(<span class="number">100</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">const</span> gradient = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, canvas.width, <span class="number">0</span>);</span><br><span class="line">    gradient.addColorStop(<span class="number">0</span>, <span class="string">'red'</span>);</span><br><span class="line">    gradient.addColorStop(<span class="number">1</span>, <span class="string">'blue'</span>);</span><br><span class="line">    ctx.fillStyle = gradient;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> imgd = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> colors = imgd.data.slice(percent * <span class="number">4</span>, percent * <span class="number">4</span> + <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;colors[<span class="number">0</span>]&#125;</span>, <span class="subst">$&#123;colors[<span class="number">1</span>]&#125;</span>, <span class="subst">$&#123;colors[<span class="number">2</span>]&#125;</span>, <span class="subst">$&#123;colors[])<span class="string">`;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">getGradientColor(40);  // rgba(152, 0, 104, 255 )</span></span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="取消阻止主线程"><a href="#取消阻止主线程" class="headerlink" title="取消阻止主线程"></a>取消阻止主线程</h2><p>将大量计算移动到Worker时，可以释放主线程上的大量资源，这会变得更加有趣。我们可以使用transferControlToOffscreen 方法将常规画布镜像到OffscreenCanvas实例。应用于OffscreenCanvas的操作将自动在源画布上呈现。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offscreen = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>).transferControlToOffscreen();</span><br><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'myworkerurl.js'</span>);</span><br><span class="line">worker.postMessage(&#123; <span class="attr">canvas</span>: offscreen &#125;, [offscreen]);</span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>OffscreenCanvas是可转让的。除了将其指定为消息中的字段之外，还需要将其作为postMessage（转移）中的第二个参数传递，以便可以在Worker上下文中使用它。</p>
-</blockquote>
-<p>在下面的示例中，当颜色主题发生变化时会发生“繁重计算” - 即使在快速桌面上也应该花费几毫秒。您可以选择在主线程或Worker线程上运行动画。在主线程的情况下，当繁重的任务运行时，您无法与按钮交互 - 线程被阻止。对于Worker，对UI响应性没有影响。</p>
-<p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png" alt></p>
-<p><a href="https://devnook.github.io/OffscreenCanvasDemo/keep-ui-responsive.html" target="_blank" rel="noopener">示例：keep-ui-responsive</a></p>
-<p>它也是另一种方式：繁忙的主线程不会影响在worker上运行的动画。尽管有主要的线程流量，您仍可以使用此功能来避免视觉抖动并保证流畅的动画：</p>
-<p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/2.png" alt></p>
-<p><a href="https://devnook.github.io/OffscreenCanvasDemo/index.html" target="_blank" rel="noopener">示例</a></p>
-<p>在常规画布的情况下，当主线程被人为地过度工作时动画停止，而基于Worker的OffscreenCanvas播放顺利。</p>
-<h2 id="与流行的库一起使用"><a href="#与流行的库一起使用" class="headerlink" title="与流行的库一起使用"></a>与流行的库一起使用</h2><p>由于OffscreenCanvas API通常与常规Canvas元素兼容，因此您可以轻松地将其用作渐进增强功能，也可以使用市场上的一些领先图形库。</p>
-<p>例如，您可以对其进行功能检测，如果可用，通过在渲染器构造函数中指定canvas选项将其与Three.js一起使用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvasEl = <span class="built_in">document</span>.querySelector(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> canvas = (<span class="string">'OffscreenCanvas'</span> <span class="keyword">in</span> <span class="built_in">window</span>) ? canvasEl.transferControlToOffscreen() : canvasEl;</span><br><span class="line">canvas.style = &#123; <span class="attr">width</span>: <span class="number">0</span>, <span class="attr">height</span>: <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123; <span class="attr">canvas</span>: canvas &#125;);</span><br></pre></td></tr></table></figure>
-
-<p>这里的问题是Three.js希望canvas具有style.width和style.height属性。OffscreenCanvas，与DOM完全分离，没有它，因此您需要自己提供它，或者通过将其删除或提供将这些值与原始画布尺寸相关联的逻辑。</p>
-<p>这是一个如何在worker中运行基本Three.js动画的演示：</p>
-<p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/3.png" alt></p>
-<p><a href="https://devnook.github.io/OffscreenCanvasDemo/use-with-lib.html" target="_blank" rel="noopener">示例：use-with-lib</a></p>
-<p>请记住，某些与DOM相关的API在Worker中并不容易获得，因此如果您想使用更高级的Three.js功能（如纹理），则可能需要更多变通方法。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果您大量使用画布的图形功能，OffscreenCanvas可以积极影响您的应用程序的性能。使工作人员可以使用画布渲染上下文增加了Web应用程序的并行性，并更好地利用了多核系统。</p>
-<p>OffscreenCanvas在Chrome 69中没有标记。它也在 Firefox 中开发。由于其API与常规canvas元素非常一致，因此您可以轻松地对其进行特征检测并将其用作渐进增强，而不会破坏现有的应用程序或库逻辑。它在图形和动画与画布周围的DOM紧密相关的所有情况下都具有性能优势。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/" rel="next" title="OffscreenCanvas - 使用Web Worker加速您的Canvas操作">
+                <i class="fa fa-chevron-left"></i> OffscreenCanvas - 使用Web Worker加速您的Canvas操作
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/前端笔记/运行gulp项目报错：AssertionError-ERR-ASSERTION-Task-function-must-be-specified/" rel="prev" title="运行gulp项目报错：AssertionError [ERR_ASSERTION]: Task function must be specified">
+                运行gulp项目报错：AssertionError [ERR_ASSERTION]: Task function must be specified <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -1289,14 +651,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -1316,8 +679,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -1446,6 +818,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概念说明"><span class="nav-number">1.</span> <span class="nav-text">概念说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用解析"><span class="nav-number">2.</span> <span class="nav-text">使用解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Transfer-模式"><span class="nav-number">3.</span> <span class="nav-text">Transfer 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码解析"><span class="nav-number">4.</span> <span class="nav-text">代码解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImageBitmap-和-ImageBitmapRenderingContext"><span class="nav-number">5.</span> <span class="nav-text">ImageBitmap 和 ImageBitmapRenderingContext</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Commit-模式"><span class="nav-number">6.</span> <span class="nav-text">Commit 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码解析-1"><span class="nav-number">7.</span> <span class="nav-text">代码解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动画驱动"><span class="nav-number">8.</span> <span class="nav-text">动画驱动</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1577,6 +966,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -1592,6 +985,8 @@
 
   
 
+
+  
 
 
   
