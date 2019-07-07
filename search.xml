@@ -10,10 +10,10 @@
       <tags>
         <tag>javascript</tag>
         <tag>模块化</tag>
-        <tag>ES6</tag>
         <tag>CommonJS</tag>
         <tag>AMD</tag>
         <tag>CMD</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
@@ -24,8 +24,8 @@
         <category>前端笔记</category>
       </categories>
       <tags>
-        <tag>gulp</tag>
         <tag>javascript</tag>
+        <tag>gulp</tag>
       </tags>
   </entry>
 </search>
