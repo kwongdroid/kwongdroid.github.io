@@ -102,7 +102,7 @@
 <meta property="og:site_name" content="落魄的前端开发">
 <meta property="og:description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at Gul">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-07T15:44:49.609Z">
+<meta property="og:updated_time" content="2019-07-07T18:08:37.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运行gulp项目报错：AssertionError [ERR_ASSERTION]: Task function must be specified">
 <meta name="twitter:description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at Gul">
@@ -460,8 +460,6 @@
       
         <p>今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：<code>gulp</code> 出现了这个错误：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ gulp build</span><br><span class="line">assert.js:339</span><br><span class="line">    throw err;</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">AssertionError [ERR_ASSERTION]: Task <span class="keyword">function</span> must be specified</span><br><span class="line">    at Gulp.set [as _setTask] (E:\Documents\GitHub\blog\node_modules\undertaker\lib\<span class="built_in">set</span>-task.js:10:3)</span><br><span class="line">    at Gulp.task (E:\Documents\GitHub\blog\node_modules\undertaker\lib\task.js:13:8)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\Documents\GitHub\blog\gulpfile.js:43:6)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:776:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:690:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br></pre></td></tr></table></figure>
-
-<a id="more"></a>
 
 <blockquote>
 <p>gulp项目需要全局安装gulp和项目内安装gulp</p>

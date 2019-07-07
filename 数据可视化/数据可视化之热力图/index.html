@@ -94,13 +94,13 @@
 
 
 
-  <meta name="description" content="本文转载自微信公众号 - LET（LET0-0）  最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1">
+  <meta name="description" content="最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1 点吧，主要是前三部分，后面只是简单分析一下百度热力图">
 <meta name="keywords" content="Canvas,数据可视化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据可视化之热力图">
 <meta property="og:url" content="https://kwongdroid.github.io/数据可视化/数据可视化之热力图/index.html">
 <meta property="og:site_name" content="落魄的前端开发">
-<meta property="og:description" content="本文转载自微信公众号 - LET（LET0-0）  最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1">
+<meta property="og:description" content="最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1 点吧，主要是前三部分，后面只是简单分析一下百度热力图">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/15ty6deq4f.jpeg?imageView2/2/w/1620">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/kswebdjaq8.png?imageView2/2/w/1620">
@@ -116,10 +116,10 @@
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/zglpprzsod.png?imageView2/2/w/1620">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/c50xz57pff.jpeg?imageView2/2/w/1620">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/7th46qjar2.jpeg?imageView2/2/w/1620">
-<meta property="og:updated_time" content="2019-07-07T17:29:28.399Z">
+<meta property="og:updated_time" content="2019-07-07T17:59:33.513Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据可视化之热力图">
-<meta name="twitter:description" content="本文转载自微信公众号 - LET（LET0-0）  最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1">
+<meta name="twitter:description" content="最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1 点吧，主要是前三部分，后面只是简单分析一下百度热力图">
 <meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/15ty6deq4f.jpeg?imageView2/2/w/1620">
 
 
@@ -473,10 +473,7 @@
       
 
       
-        <blockquote>
-<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149060" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
-</blockquote>
-<p>最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。</p>
+        <p>最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。</p>
 <p>好了，热力图还是相对比较容易，我们主要讨论如下 3+1 点吧，主要是前三部分，后面只是简单分析一下百度热力图和个人的简单看法。热点图的实现参考了 SuperMap 的热点图和百度 Echarts 的热点图实现。</p>
 <ul>
 <li>原理</li>
@@ -525,6 +522,9 @@
 <p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/7th46qjar2.jpeg?imageView2/2/w/1620" alt></p>
 <p>总体来说，个人觉得有两点收获：1 功能的实现不是完结，而是开始，方能深入掌握其中，就好比一锅汤，精华都在下面，沉得住寂寞，肯定有所收获。2 热力图的技术点都不难，一看便知，但不看还真不知道，这些技术点看起来没关系，但结合好了性能的提升非常明显。所以，见的多了经验就多。</p>
 <p>今天圣诞节了，每年圣诞节我都会买一本书，然后写上”Merry Christmas to me”，然后送给自己，能看到这的人也都是真爱，再唠叨几句吧：昨天听了一个 deliberate practice 的概念，讲的是同等时间下，业余爱好者喜欢不断练习自己熟悉的动作，而专业选手则会专注在自己不熟悉但有机会掌握的动作，这一块在心理学中成为 panic zone，属于你知道，但不精通的部分。个人觉得收获很大，如何更好的发挥时间价值，这也是我，作为一个老人家需要调整的地方。</p>
+<blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149060" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
 
       
     </div>

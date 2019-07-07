@@ -94,13 +94,13 @@
 
 
 
-  <meta name="description" content="本文转载自微信公众号 - LET（LET0-0）  今天来看一下 Earth NullSchool。  如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Envi">
+  <meta name="description" content="今天来看一下 Earth NullSchool。  如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Environmental Prediction。 吸取上一篇">
 <meta name="keywords" content="Canvas,数据可视化">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据可视化之Earth NullSchool">
 <meta property="og:url" content="https://kwongdroid.github.io/数据可视化/数据可视化之Earth-NullSchool/index.html">
 <meta property="og:site_name" content="落魄的前端开发">
-<meta property="og:description" content="本文转载自微信公众号 - LET（LET0-0）  今天来看一下 Earth NullSchool。  如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Envi">
+<meta property="og:description" content="今天来看一下 Earth NullSchool。  如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Environmental Prediction。 吸取上一篇">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/jtklykjr4h.gif">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/66e8xhhel8.jpeg?imageView2/2/w/1620">
@@ -109,10 +109,10 @@
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/hxt3pdd7t1.jpeg?imageView2/2/w/1620">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/vtd8dqd1vj.jpeg?imageView2/2/w/1620">
 <meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/ot1uwysuhc.jpeg?imageView2/2/w/1620">
-<meta property="og:updated_time" content="2019-07-07T17:33:23.656Z">
+<meta property="og:updated_time" content="2019-07-07T17:59:44.188Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据可视化之Earth NullSchool">
-<meta name="twitter:description" content="本文转载自微信公众号 - LET（LET0-0）  今天来看一下 Earth NullSchool。  如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Envi">
+<meta name="twitter:description" content="今天来看一下 Earth NullSchool。  如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Environmental Prediction。 吸取上一篇">
 <meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/jtklykjr4h.gif">
 
 
@@ -466,10 +466,7 @@
       
 
       
-        <blockquote>
-<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149110" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
-</blockquote>
-<p>今天来看一下 Earth NullSchool。</p>
+        <p>今天来看一下 Earth NullSchool。</p>
 <p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/jtklykjr4h.gif" alt></p>
 <p>如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Environmental Prediction。</p>
 <p>吸取上一篇的教训，直入主题。当然，想要了解风图原理的，可以看看之前写的可视化之风向图，需要对风图的数据和思路有一定了解，不然本文在理解上可能会有点吃力。</p>
@@ -490,6 +487,9 @@
 <p>对风场向量的插值过程是在 interpolateField 方式中实现的，这里逻辑如下：1:创建当前窗口对应的掩膜，如上图，全部区域都是黑色(0,0,0,0)，只有地球对应的区域颜色为(255, 0, 0, 1) ；2 随机生成风粒子，每一个粒子有五个属性，位置(XY),风速(UV)和生命周期(t)；3 类似一条扫描线，遍历可视区域的每一像素点，通过掩膜判断是否在有效范围内，如果该点有效，则获取其对应的经纬度；4 以全球网格为索引，获取该点对应的风场 Field，保存到对应的向量场 wind field，用于后面的风图效果；5 根据风场的强度，对应颜色表设置当前点的颜色强度，保存到 mask 掩膜中，这样 mask 在更新时用来判断区域是否可见，更新后则用于显示地图效果，也算是一图两用。如上是初始化的核心部分，里面有很多小的细节，比如风向，在平面上，XY 两个向量是直线，而在球面上，要调整为对应的经纬度，是曲线(distortion 函数)。</p>
 <p>接着，每一帧根据风图的原理，实时更新：风粒子的当前位置，根据当前位置的风速获取下一帧的位置，数据更新(createField::field.move)后则开始渲染(animate.draw),这部分在风向图原理里面有很清楚的介绍，思路完全一致，这里只是把关键点和对应函数实现对应起来，关键还是要思路，如果有意愿不妨自己调试，便一目了然。</p>
 <p>至于鼠标点击显示当前状态，代码我没有看，不过上述过程中已经提供了位置转换，数据存储，很容易获取映射关系。</p>
+<blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149110" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
 
       
     </div>
