@@ -103,7 +103,7 @@
 <meta property="og:description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://kwongdroid.github.io/.io//1.png">
-<meta property="og:updated_time" content="2019-07-07T14:49:42.126Z">
+<meta property="og:updated_time" content="2019-07-07T14:53:50.977Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OffscreenCanvas - 使用Web Worker加速您的Canvas操作">
 <meta name="twitter:description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
@@ -478,7 +478,7 @@
 <p>OffscreenCanvas是可转让的。除了将其指定为消息中的字段之外，还需要将其作为postMessage（转移）中的第二个参数传递，以便可以在Worker上下文中使用它。</p>
 </blockquote>
 <p>在下面的示例中，当颜色主题发生变化时会发生“繁重计算” - 即使在快速桌面上也应该花费几毫秒。您可以选择在主线程或Worker线程上运行动画。在主线程的情况下，当繁重的任务运行时，您无法与按钮交互 - 线程被阻止。对于Worker，对UI响应性没有影响。</p>
-<p><img src="/.io//1.png" alt="1"></p>
+<p><img src="/.io//1.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/keep-ui-responsive.html" target="_blank" rel="noopener">示例：keep-ui-responsive</a></p>
 <p>它也是另一种方式：繁忙的主线程不会影响在worker上运行的动画。尽管有主要的线程流量，您仍可以使用此功能来避免视觉抖动并保证流畅的动画：</p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/index.html" target="_blank" rel="noopener">示例</a></p>
