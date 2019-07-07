@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar-180x180.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar-16x16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/avatar.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文转载自微信公众号 - LET（LET0-0）  最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1">
+<meta name="keywords" content="Canvas,数据可视化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化之热力图">
+<meta property="og:url" content="https://kwongdroid.github.io/数据可视化/数据可视化之热力图/index.html">
+<meta property="og:site_name" content="落魄的前端开发">
+<meta property="og:description" content="本文转载自微信公众号 - LET（LET0-0）  最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/15ty6deq4f.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/kswebdjaq8.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/swfepmp953.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/bnfn1qv6gb.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/7kzk5chwv6.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/p82fks6vzn.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/pvrkrq0pt6.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/q3v5y0twj2.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/k9xmva56ai.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/ssbetfd75i.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/ujh9t8w135.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/zglpprzsod.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/c50xz57pff.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/7th46qjar2.jpeg?imageView2/2/w/1620">
+<meta property="og:updated_time" content="2019-07-07T17:29:28.399Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据可视化之热力图">
+<meta name="twitter:description" content="本文转载自微信公众号 - LET（LET0-0）  最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。 好了，热力图还是相对比较容易，我们主要讨论如下 3+1">
+<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/15ty6deq4f.jpeg?imageView2/2/w/1620">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://kwongdroid.github.io/数据可视化/数据可视化之热力图/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>数据可视化之热力图 | 落魄的前端开发</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落魄的前端开发</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/kwongdroid" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/数据可视化/数据可视化之热力图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据可视化之热力图
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-16 01:23:09" itemprop="dateCreated datePublished" datetime="2017-12-16T01:23:09+08:00">2017-12-16</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据可视化/" itemprop="url" rel="index"><span itemprop="name">数据可视化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149060" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
+<p>最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。</p>
+<p>好了，热力图还是相对比较容易，我们主要讨论如下 3+1 点吧，主要是前三部分，后面只是简单分析一下百度热力图和个人的简单看法。热点图的实现参考了 SuperMap 的热点图和百度 Echarts 的热点图实现。</p>
+<ul>
+<li>原理</li>
+<li>实现</li>
+<li>优化</li>
+<li>百度热力图简述</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a><strong>原理</strong></h2><p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/15ty6deq4f.jpeg?imageView2/2/w/1620" alt></p>
+<p>如上是全国范围内的截图，一看就能了解当前中国人口密集度。每个区域的形状不规则，而且还五颜六色。直觉上，我们会觉得每个区域都应该有一个位置点，还应该有一个缓冲范围，然后对这个范围内进行一个渐变效果。这个思路应该还是比较理性的，只是还是无法解释区域的不规则，但抽象了位置点（XY）和渐变（五颜六色）的数据概念。那我们再结合数据，看看我们的推理是否准确。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/kswebdjaq8.png?imageView2/2/w/1620" alt></p>
+<p>这是一个示例数据，可见每一个 HeatPoint 由三部分组成(X,Y,Weight)。这个和我们之前分析的比较类似，每一个热点都有一个位置和权重，权重越大，则该点越显著，也就代表其渐变的一个衰变因素。不规则的区域又是如何形成的？看完代码后发现，是每个热点各管各的，然后相互叠加影响，形成了最终具有真实意义的奇形怪状的热点图。想想也是，不然好看不实用，那热点图的设计也就本末倒置了。另外还有一个半径属性，主要是缓冲区的半径，表示该热点的影响范围，通常我们认为所有热点的影响范围即半径都是一样的，只是权重不同，这也是为了处理的方便。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/swfepmp953.jpeg?imageView2/2/w/1620" alt></p>
+<p>打个比方，下雨天的池塘，每一个雨滴都会引起一个涟漪，这就相当于一个热点，位置不同，雨滴的大小速度质量等并不完全一样，因此具有不同的权重，但在水面上，相互影响，形成了很多不同的形状，而水波的密集度可以用渐变来体现。这样，我们则把每一个个离散点，通过一个缓冲区，转变为连续的面，进而对其进行可视化展现。</p>
+<p>当然，在数据上需要多提一点，实际中，因为热点数据量非常大，所以在不同级别下的数据会有优化，比如全国范围内（大）的数据比较粗略（小），而区域范围内（小）数据精细（大）。这里面有一个抽稀和聚类的处理（个人感觉应该是这个思路），这是数据处理层面的问题，我们下面还是专注可视化方面的问题。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a><strong>实现</strong></h2><p>这些代码都比较简单，如果你对 canvas 有一定基础，相信也能明白，主要是看思路。首先就是对所有点进行一次筛选和统计，只保留屏幕范围内的热点，并根据权重获取当前最大和最小权重。这样我们获取了一个<code>[minWeight，maxWeight]</code>以及所有需要处理的 drawPoints 数组，为下面的渲染准备好数据。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/bnfn1qv6gb.png?imageView2/2/w/1620" alt></p>
+<p>渲染的过程其实就是对每一个热点权重范围内的点进行颜色的更新，颜色包括两个部分：RGB 和 Alpha。而渲染过程也分为两个过程：权重的计算和权重对应的颜色（RGB + Alpha）。</p>
+<p>首先，权重的计算是一个插值的过程，根据权重值和范围值（距离热点的距离）的算法，你可以根据具体的需要选择合适的算法，而计算主要有两种情况，当前点还没有任何权重值；累加当前点的权重值。点越密，累加后的权重值就越高，则可以用权重值高的风格（红色）突出。其次就是根据权重值获取对应的颜色，这里会有一个颜色表，根据不同的权重值，采用具体的差值算法获取对应的颜色。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/7kzk5chwv6.png?imageView2/2/w/1620" alt></p>
+<p>这样则完成了热点图的渲染，这里需要注意的是，两个 for 循环是对热点的行列的遍历，本身是一个矩阵范围，而热点本身的范围应该是一个圆，因此在 for 循环中需要判断是否在圆内。最终效果如下图：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/p82fks6vzn.jpeg?imageView2/2/w/1620" alt></p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a><strong>优化</strong></h2><p>如上就是热点图的原理和实现，基本上实现都大同小异。不知道你看出来有什么问题了没有？性能！</p>
+<p>这个实现有一个特点，假设有 N 个热点，权重假设是(0,1)之间的平均值 0.5，半径假设为 R(像素单位),那一共要有 N _ 0.5 _ R _ R _ 4（4 个象限），这个计算量是惊人的，和 N 以及 R 的平方是线性增长。另外一个特点，在 for 循环中的规则都是一致的。</p>
+<p>这就让我们想到，如何能够进行优化，答案就是批次和模板。在开始前，我们先说两个技术点。</p>
+<h3 id="Canvas-渐变填充"><a href="#Canvas-渐变填充" class="headerlink" title="Canvas 渐变填充"></a><strong>Canvas 渐变填充</strong></h3><p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/pvrkrq0pt6.png?imageView2/2/w/1620" alt></p>
+<p>如上是伪代码，最终是在 canvas 上绘制了一个圆，但本身是从黑到白的渐变，同时阴影在 x 轴上偏移 d 个像素，这样，该代码生成了如下一张图片，我们称它为权重图，暂时不解释，只需要明白这段代码生成该图的过程即可。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/q3v5y0twj2.png?imageView2/2/w/1620" alt></p>
+<h3 id="Canvas-色带"><a href="#Canvas-色带" class="headerlink" title="Canvas 色带"></a><strong>Canvas 色带</strong></h3><p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/k9xmva56ai.png?imageView2/2/w/1620" alt></p>
+<p>这里主要有两个函数：</p>
+<ul>
+<li>createLinearGradient()创建线性的渐变对象</li>
+<li>addColorStop() 方法规定不同的颜色，以及在 gradient 对象中的何处定位颜色</li>
+</ul>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ssbetfd75i.png?imageView2/2/w/1620" alt></p>
+<p>这样，我们便创建了一个色带，就是如上这样一个效果，当然我们也可以根据自己的需要，定义一个彩色色带，就想我们平时所见的调色板中的颜色色带一样。这里比较宽，主要是给大家看一下效果，真正程序中，宽度只需要一个像素就可以。</p>
+<h3 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a><strong>实例化</strong></h3><p>不知道大家这时候是否发现了里面的原理和巧妙之处？</p>
+<p>打个比方，我一直想买一个印章，这样每次买书的时候，就不用自己一笔一划的来写了，字写得比人还丑，这可以理解（不过最后还是没买，因为最后连书也买不起了）。假如我有了印章，这样每次就不用自己写了，直接盖章多省事啊，而且还一模一样。</p>
+<p>这里，假设这个章是圆形的，它就是一个模板，对应的就是创建好的渐变填充的纹理。以前我们需要对热点缓冲区内的所有点都进行计算，计算出权重值，现在只需要以该热点为圆心盖一下，则把该热点范围内所有点的权重值都写上去了。</p>
+<p>于是，逐个把所有热点都盖章，这样权重值不是都有了嘛，啪啪啪的声音就是爽。但这有一个问题，热点之间的相互影响怎么处理？这是需要叠加效果的，而不是后盖的章覆盖前者的效果。这里在盖章的时候增加一个透明度的属性，谁的权重大，谁的透明度就小，这样就可以叠加效果了，之前写的风向图的轨迹也是这个思路，还记得吗？下面是逐次盖章（贴图）的代码实现，大家过一遍，都是一个思路。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ujh9t8w135.png?imageView2/2/w/1620" alt></p>
+<p>这样之后，我们就有了一个“热力图”了，不过略有遗憾，因为它是黑白相机拍出来的，都是 0~255 的灰度值，也就是权重信息。这样，我们就需要根据之前创建的色带来对它进行上色的过程了</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/zglpprzsod.png?imageView2/2/w/1620" alt></p>
+<p>可见，通过模板，我们可以极大的减少计算量，渲染也是批次的，而不是逐点赋值。这样我们可以根据不同的算法来创建对应的模板，实现不同的热点风格。下面是百度热力图采用这个方式实现的思路。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/c50xz57pff.jpeg?imageView2/2/w/1620" alt></p>
+<h2 id="百度热力图-amp-总结"><a href="#百度热力图-amp-总结" class="headerlink" title="百度热力图&amp;总结"></a><strong>百度热力图&amp;总结</strong></h2><p>不知不觉又写了这么多，就压缩一下篇幅吧。如下，是百度热力图八小时的请求队列，从 v 的属性可以看出来是小时单位，而 xyz 和地图行列号一致。如果想要叠加百度热力图的，就可以按照这个思路来加载热力图层了。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/7th46qjar2.jpeg?imageView2/2/w/1620" alt></p>
+<p>总体来说，个人觉得有两点收获：1 功能的实现不是完结，而是开始，方能深入掌握其中，就好比一锅汤，精华都在下面，沉得住寂寞，肯定有所收获。2 热力图的技术点都不难，一看便知，但不看还真不知道，这些技术点看起来没关系，但结合好了性能的提升非常明显。所以，见的多了经验就多。</p>
+<p>今天圣诞节了，每年圣诞节我都会买一本书，然后写上”Merry Christmas to me”，然后送给自己，能看到这的人也都是真爱，再唠叨几句吧：昨天听了一个 deliberate practice 的概念，讲的是同等时间下，业余爱好者喜欢不断练习自己熟悉的动作，而专业选手则会专注在自己不熟悉但有机会掌握的动作，这一块在心理学中成为 panic zone，属于你知道，但不精通的部分。个人觉得收获很大，如何更好的发挥时间价值，这也是我，作为一个老人家需要调整的地方。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>kwongdroid</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://kwongdroid.github.io/数据可视化/数据可视化之热力图/" title="数据可视化之热力图">https://kwongdroid.github.io/数据可视化/数据可视化之热力图/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Canvas/" rel="tag"><i class="fa fa-tag"></i> Canvas</a>
+          
+            <a href="/tags/数据可视化/" rel="tag"><i class="fa fa-tag"></i> 数据可视化</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/" rel="next" title="图解 ArrayBuffers 和 SharedArrayBuffers">
+                <i class="fa fa-chevron-left"></i> 图解 ArrayBuffers 和 SharedArrayBuffers
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/数据可视化/数据可视化之风向图/" rel="prev" title="数据可视化之风向图">
+                数据可视化之风向图 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="kwongdroid">
+            
+              <p class="site-author-name" itemprop="name">kwongdroid</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/kwongdroid" title="GitHub &rarr; https://github.com/kwongdroid" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="mailto:kwongdroid@qq.com" title="E-Mail &rarr; mailto:kwongdroid@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/kwongdroid" title="Weibo &rarr; https://weibo.com/kwongdroid" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现"><span class="nav-number">2.</span> <span class="nav-text">实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优化"><span class="nav-number">3.</span> <span class="nav-text">优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-渐变填充"><span class="nav-number">3.1.</span> <span class="nav-text">Canvas 渐变填充</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-色带"><span class="nav-number">3.2.</span> <span class="nav-text">Canvas 色带</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例化"><span class="nav-number">3.3.</span> <span class="nav-text">实例化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#百度热力图-amp-总结"><span class="nav-number">4.</span> <span class="nav-text">百度热力图&amp;总结</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kwongdroid</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="255,0,0" opacity="0.8" zindex="-1" count="66" src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click-heart.js"></script>
+</body>
+</html>

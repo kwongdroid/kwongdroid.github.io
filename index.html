@@ -234,7 +234,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">7</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
 
   </li>
         
@@ -252,7 +252,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">3</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
 
   </li>
         
@@ -270,7 +270,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">5</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
 
   </li>
 
@@ -1290,6 +1290,847 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/数据可视化/数据可视化之Earth-NullSchool/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/数据可视化/数据可视化之Earth-NullSchool/" class="post-title-link" itemprop="url">数据可视化之Earth NullSchool</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-18 23:29:03" itemprop="dateCreated datePublished" datetime="2018-06-18T23:29:03+08:00">2018-06-18</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据可视化/" itemprop="url" rel="index"><span itemprop="name">数据可视化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149110" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
+<p>今天来看一下 Earth NullSchool。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/jtklykjr4h.gif" alt></p>
+<p>如上是该网站的一个动图效果，有兴趣的可以访问网站了解一个大概。作者在 github 上公布了自己的源码(和网站代码略有不同)，气象数据来自 NCEP，记得上周介绍的 AQICN 美国数据也是来自该网站，查了一下，该组织应该算是美国的国家气象局：National Centers for Environmental Prediction。</p>
+<p>吸取上一篇的教训，直入主题。当然，想要了解风图原理的，可以看看之前写的可视化之风向图，需要对风图的数据和思路有一定了解，不然本文在理解上可能会有点吃力。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/66e8xhhel8.jpeg?imageView2/2/w/1620" alt></p>
+<p>如上是具体数据列表，Mode 里显示支持 Air(风图)，Ocean(洋流)，Chem(化学物)，Particulates(颗粒物)，Height 指向不同高度，Overlay 表示叠加图层，比如风图+温度，洋流+浪高等，Control 为时间轴控件，比如历史数据。点击查看不同的数据效果，不难找到对应数据的 url 的规范。</p>
+<p>气象数据采用的是 epak 格式，二进制流，代码中提供了数据规范。如下是数据规范和对应的 JSON 属性：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/010yhlpjwo.jpeg?imageView2/2/w/1620" alt></p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/wr3zv9p05z.jpeg?imageView2/2/w/1620" alt></p>
+<p>从 converter 属性，该数据来自 netcdf，而这个格式在之前的 Berkeley Earth 中也提到过，而原始数据是 grib 形式，以我的理解，里面应该有一个 grib2netcdf2epak 的过程，都提供了对应的转换工具。至于为何绕圈，我搜索了一下大概，知道一个大概优劣，但貌似都不绝对，在此就不妄论了。</p>
+<p>对我个人而言，花时间最久的是如何以 localhost 方式获取该数据，因为它是 HTTPS 服务，做了 Referer 限制，对于我这个 Java 小白，绝对算得上是一个难题，不过反过来想，这不就是上天给我一个机会，让我学 JavaWeb 吗。花了不少时间，也请教了研发两位牛人，终于在 Jetty+Servlet 下实现了一个 Java 版的 Proxy，是本次最有收获的地方，代码一并奉上，见笑。</p>
+<p>有了本地代理服务，对源码进行简单的修改，让其走代理，就实现了 localhost 的部署，两个参数:url 和 type。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/hxt3pdd7t1.jpeg?imageView2/2/w/1620" alt></p>
+<p>在地图初始化的时候，先构建了全球格网，是一个 2：1 的矩形，下面是经过投影后的球状格网效果，主要用于后续获取任意点在地球上的位置，进而获取对应的风速(X,Y)，该方法提供了临近插值和双线性插值两种方式，该过程封装在 rectangularGrid 函数中。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/vtd8dqd1vj.jpeg?imageView2/2/w/1620" alt></p>
+<p>接着，开始请求气象数据数据，解析过程封装在 decodeEpak 函数中：获取对应的 JSON 属性，全球风图是 720*360 大小，精度为 0.5℃，每个点有 X 和 Y 两个分量，在 X 和 Y 方向的向量，米单位。</p>
+<p>万事俱备只欠东风——起风。这里有两点，第一，平移缩放时没有任何效果的，这是因为当 bounds 变化时，需要根据更新后的区域重新插值，计算量比较大，而插值的价值是精度上有保证，清晰，所以这是一个取舍。第二，不仅有一个风图，还有一个栅格底图，下图蓝绿色效果图，仔细看，和风的走势是吻合的，同时鼠标点击时，能获取对应位置的属性值。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ot1uwysuhc.jpeg?imageView2/2/w/1620" alt></p>
+<p>对风场向量的插值过程是在 interpolateField 方式中实现的，这里逻辑如下：1:创建当前窗口对应的掩膜，如上图，全部区域都是黑色(0,0,0,0)，只有地球对应的区域颜色为(255, 0, 0, 1) ；2 随机生成风粒子，每一个粒子有五个属性，位置(XY),风速(UV)和生命周期(t)；3 类似一条扫描线，遍历可视区域的每一像素点，通过掩膜判断是否在有效范围内，如果该点有效，则获取其对应的经纬度；4 以全球网格为索引，获取该点对应的风场 Field，保存到对应的向量场 wind field，用于后面的风图效果；5 根据风场的强度，对应颜色表设置当前点的颜色强度，保存到 mask 掩膜中，这样 mask 在更新时用来判断区域是否可见，更新后则用于显示地图效果，也算是一图两用。如上是初始化的核心部分，里面有很多小的细节，比如风向，在平面上，XY 两个向量是直线，而在球面上，要调整为对应的经纬度，是曲线(distortion 函数)。</p>
+<p>接着，每一帧根据风图的原理，实时更新：风粒子的当前位置，根据当前位置的风速获取下一帧的位置，数据更新(createField::field.move)后则开始渲染(animate.draw),这部分在风向图原理里面有很清楚的介绍，思路完全一致，这里只是把关键点和对应函数实现对应起来，关键还是要思路，如果有意愿不妨自己调试，便一目了然。</p>
+<p>至于鼠标点击显示当前状态，代码我没有看，不过上述过程中已经提供了位置转换，数据存储，很容易获取映射关系。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/数据可视化/数据可视化之风向图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/数据可视化/数据可视化之风向图/" class="post-title-link" itemprop="url">数据可视化之风向图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-03 00:59:57" itemprop="dateCreated datePublished" datetime="2018-01-03T00:59:57+08:00">2018-01-03</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据可视化/" itemprop="url" rel="index"><span itemprop="name">数据可视化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149061" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
+<p>很多人都见过风向图，直观形象，也是地图数据和现实数据在可视化上很好的结合。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ebv1r21nbd.gif" alt></p>
+<p>这是我见的第一个风向图，记得是 2012 年吧，当时觉得很有意思，作为一名技术人员，自然好奇它是如何做到的，是 Canvas 还是 SVG？但当时没深究。最近正好有人（大哥）提到了这个，不妨深入了解，一探究竟。于是乎，发现原来还有这么多玩法，大同小异，比如说这个，来自 earth.nullschool.net：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/yt2929jpb3.jpeg?imageView2/2/w/1620" alt></p>
+<p>当然还有来自度娘开源的 echarts-x 的：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/4zareing2j.jpeg?imageView2/2/w/1620" alt></p>
+<p>基本上，这三个效果图基本涵盖了目前风向图的技术点和功能点（我自己的看法，因为 windyty 是基于 earth.nullschool 写的，前者多了一个 worker 线程处理数据，而后者在 github 上开源）。不知道哪一个最对你的胃口？对我而言，图 1 简单易懂，可以快速掌握风向图的实现；图 2 是实时的全球风向数据，而且是二进制格式，是大数据传输的一个方案；图 3 则采用 WebGL 实时渲染，算是大数据渲染的一个方案，所以各有千秋。正好本文就结合这三个例子说一下其中处理好的地方，也是一个由易到难的过程。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a><strong>原理</strong></h2><p>乍看上去，多少会觉得无从下手。这是怎么做到的？其实吧，懂与不懂就是那一层纸，就看你愿不愿意戳破而已。我们先从数据说起。</p>
+<p>首先介绍一下向量场（Vector Field）的概念。在维基百科的解释是：在向量分析中，向量场是把空间中的每一点指派到一个向量的映射。物理学中的向量场有风场、引力场、电磁场、水流场等等。如图，下面是一个二维的向量场，每一个点都是一个向量。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/kd2v1r622u.jpeg?imageView2/2/w/1620" alt></p>
+<p>当然这是一个抽象的数学概念和表达，物理中的电磁场经常会用到它，在现实中其实也随处可见，比如下面这个有意思的磁场的向量表达，密集恐惧症的人请略过~</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/9kigiizqv9.jpeg?imageView2/2/w/1620" alt></p>
+<p>同理，风场的抽象模型也是一个向量场：每一个点都有一个风速和方向，可以分解为在该点分别在 XY 方向上的向量（我们简化为 XY 两个方向，不考虑 Z，所以可惜不能听《龙卷风》了），则该向量则代表该点 X 方向和 Y 方向的速度。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/lwlk34jkfq.png?imageView2/2/w/1620" alt></p>
+<p>如上图，是一个真实的风向图数据。简单来说，timestamp 代表当前数据的采集时间，（x0，y0，x1，y1）分别是经纬度的范围，而 grid 是该向量场的行列数，field 就是向量场中每一个点的速度值，如果是(0,0)则表示此点风平浪静。可能不同平台的风向图数据有一定差别，但都大同小异。</p>
+<p>向量场和数据格式，直觉上，我们可以知道，就是把这些向量拟合成平滑线，可以形成如下一个真实的风向。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/g1iz93y6cj.jpeg?imageView2/2/w/1620" alt></p>
+<p>如何形成线，而且看上去全球范围内有总不能只有一阵风吧（让我想起了木星的大红斑，这场风在木星已经吹了至少 200 年从来没停过），这揭露了两个问题，1 向量场是离散点，而线是平滑，这里面有一个插值问题；2 更麻烦的是，这些线有好多好多连接的方式，都可以连接成线，有点类似等高线的算法，怎么连，看上去无从下手啊。</p>
+<p>这是我看完数据后，自己觉得要实现风向效果时觉得需要解决的问题，感觉好难啊。怀着这个疑问进入梦乡，第二天 format 了一下 js 脚本，本地调试后，发现我的问题是对的，可是思路是错的。不要一上来就考虑这么多因素，而是基于当前的状态来解决当前的问题，就好比一道非常复杂的代数问题，或许通过几何方式反而可以很简单的解决。</p>
+<p>不多废话了，尽管我觉得这些废话才是提高能力的最有价值的，解决问题不过是一个感悟过程的必然而已。好了，有了数据，看看“神诸葛”如何起风的吧。</p>
+<p>举个例子，给你一个围棋棋盘（向量场），每一个格子就是一个向量，你随手拿一个棋子，随手（随机）放在一个格子上，这就是风的起点。下一回合（下一帧或下一秒），你根据当前格子的向量值（X 值和 Y 值）移动棋子，就是风在当前的风速下拖着常常的尾巴跳到下一个格子上的效果。这样，这个棋子会根据所在格子的向量值不停的移动，直到格子的向量值为零（风停）。</p>
+<p>也就是说只要给一个起点，我就能刮起一股风来。那给你 5000 个棋子（起点），你就能刮起 5000 股风了。当然可能两股气流重叠，这时可能不太符合物理规律了，因为我们的思路下是各吹各的，不过谁关心呢。于是，基于每一帧状态的管理，我们可以很简单的模拟出风向图的效果。很简单巧妙吧。</p>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>好了，理论上我们知道该怎么做了，看看如何代码实现。我们也整理一下这个流程，把它们模块化。</p>
+<p>今天就和围棋干上了，还是这个例子，首先呢就是数据，也就是棋盘和格子，也就是 Vector 和 Vector Field 这两个对象来方便数据的读取、管理等；其次，当然是棋子了，记录每一个棋子的生命周期，当前的位置，下一步的位置，也就是风上对应的每一个帧的位置信息，这个是 Particle 类来记录这些信息；最后，有了棋盘和棋子，还需要一个推手来落子，这里称作 MotionDisplay 把，负责管理每一回合（帧）下棋子对应棋盘的位置，这个类要做的事情很多：有多少个棋子、哪一个还收回、需要新增几个棋子（风粒子的管理），怎么在棋盘上放置（渲染）；等等，最后还少了一个，就是时钟啊，每一回合可是要读秒的哦，也就是 Animation。感觉例子比喻的很贴切啊，忍不住要放一张棋魂的图片来庆祝一下。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/pjdvfunw9c.jpeg?imageView2/2/w/1620" alt></p>
+<p>还是得上代码，不然显得不专业。下面先把上面提到的这些对象中一些关键的属性和方法说明一下，可以知道哪些关键的属性是由哪些类来管理，而一些关键的方法进行一个说明，大家可以先专注类和函数本身的内容，了解这个拼图的部分内容。最终会有一个初始化的函数来一个整体流程的介绍，这时大家会了解整个拼图的面貌。</p>
+<p>向量比较简单，就是 X 和 Y 两个分量，其他的比如长度，角度这些方法就不在此赘述：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vector = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面是向量场类读取 JSON 数据并解析：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">VectorField.read= <span class="function"><span class="keyword">function</span>(<span class="params">data, correctForSphere</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> field = [];</span><br><span class="line">    <span class="keyword">var</span> w = data.gridWidth;</span><br><span class="line">    <span class="keyword">var</span> h = data.gridHeight;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="number">0</span>; x &lt; w; x++) &#123;</span><br><span class="line">        field[x] = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> y = <span class="number">0</span>; y &lt; h; y++) &#123;</span><br><span class="line">            <span class="keyword">var</span> vx = data.field[i++];</span><br><span class="line">            <span class="keyword">var</span> vy = data.field[i++];</span><br><span class="line">            <span class="keyword">var</span> v = <span class="keyword">new</span> Vector(vx,vy);</span><br><span class="line">            ……</span><br><span class="line">            field[x][y] = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = newVectorField(field,data.x0,data.y0,data.x1,data.y1);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如此，向量场已经布置完善，当然，对照 JSON 数据仔细看一下代码，有保存了经纬度的范围，行和列等信息，当然，该类中有其他几个函数没有在此列出，比如判断一个点是否在棋盘内，另外还有插值，因为每一个网格位置都是离散的，行和列都是整数，而现实中风的走向是连续的，可能在当前时刻的位置是分数，则需要根据临近的整数点的值插值获取当前点的一个近似值，这里采用的是双线性插值，取的周围四个点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">VectorField.prototype.bilinear= <span class="function"><span class="keyword">function</span>(<span class="params">coord, a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> na = <span class="built_in">Math</span>.floor(a);  </span><br><span class="line">    <span class="keyword">var</span> nb = <span class="built_in">Math</span>.floor(b);  </span><br><span class="line">    <span class="keyword">var</span> ma = <span class="built_in">Math</span>.ceil(a);  </span><br><span class="line">    <span class="keyword">var</span> mb = <span class="built_in">Math</span>.ceil(b);  </span><br><span class="line">    <span class="keyword">var</span> fa = a - na;  </span><br><span class="line">    <span class="keyword">var</span> fb = b - nb;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.field[na][nb][coord] _ (<span class="number">1</span> - fa)_ (<span class="number">1</span> - fb) +</span><br><span class="line">    <span class="keyword">this</span>.field[ma][nb][coord] _ fa _ (<span class="number">1</span> - fb) + <span class="keyword">this</span>.field[na][mb][coord] _ (<span class="number">1</span> - fa) _ fb + <span class="keyword">this</span>.field[ma][mb][coord] _ fa _ fb;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上是向量和向量场的一些关键函数和属性。实现了读取数据，通过 getValue 函数获取任意一个位置（可以使小数）的速度的 X 和 Y 分量。</p>
+<p>下面就是棋子了，每一回合棋子的位置也就是风在每一帧的位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Particle =<span class="function"><span class="keyword">function</span>(<span class="params">x, y, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;  </span><br><span class="line">    <span class="keyword">this</span>.y = y;  </span><br><span class="line">    <span class="keyword">this</span>.oldX = <span class="number">-1</span>;  </span><br><span class="line">    <span class="keyword">this</span>.oldY = <span class="number">-1</span>;  </span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上，XY 是当前的位置，而 old 则是上一帧的位置，age 是它的生命周期，有的时候棋子会被吃，起风了也有风停的那一刻，都是通过 age 来记录它还能活多久（每一帧减一）。</p>
+<p>现在就开始介绍这只下棋的手了，看如何起风如何刮。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">varMotionDisplay = <span class="function"><span class="keyword">function</span>(<span class="params">canvas, imageCanvas, field, numParticles,opt_projection</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.field = field;  </span><br><span class="line">    <span class="keyword">this</span>.numParticles = numParticles;  </span><br><span class="line">    <span class="keyword">this</span>.x0 = <span class="keyword">this</span>.field.x0;  </span><br><span class="line">    <span class="keyword">this</span>.x1 = <span class="keyword">this</span>.field.x1;  </span><br><span class="line">    <span class="keyword">this</span>.y0 = <span class="keyword">this</span>.field.y0;  </span><br><span class="line">    <span class="keyword">this</span>.y1 = <span class="keyword">this</span>.field.y1;  </span><br><span class="line">    <span class="keyword">this</span>.makeNewParticles(<span class="literal">null</span>, <span class="literal">true</span>);  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这是它的构造函数，用来记录向量场的信息（范围和速度向量），同时 numParticles 表示粒子数，即同时有多少条风线在地图上显示。projection 用于经纬度和向量场之间的映射换算。最后 makeNewParticles 则会构建 numParticles 个风，并随机赋给它们一个起点和生命周期，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.makeNewParticles= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.particles = [];  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.numParticles;i++) &#123;  </span><br><span class="line">        <span class="keyword">this</span>.particles.push(<span class="keyword">this</span>.makeParticle(animator));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.makeParticle= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">var</span> b = <span class="built_in">Math</span>.random();  </span><br><span class="line">    <span class="keyword">var</span> x = a * <span class="keyword">this</span>.x0 + (<span class="number">1</span> - a) *<span class="keyword">this</span>.x1;  </span><br><span class="line">    <span class="keyword">var</span> y = b _ <span class="keyword">this</span>.y0 + (<span class="number">1</span> - b) _ <span class="keyword">this</span>.y1;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Particle(x,y,<span class="number">1</span> + <span class="number">40</span> * <span class="built_in">Math</span>.random());  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上是一个简单的创建粒子的过程：随机在经纬度（x，y）创建一个能够存活 1 + 40 *Math.random()帧的风，一共创建 numParticles 个这样的随机风。当然这里为了简单示意。并没有考虑随机数是否会超出范围等特殊情况。</p>
+<p>对象都构建完成了，那每一帧这只手如何主持大局呢？两件事情：Update 和 Render。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.animate= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.moveThings(animator);<span class="comment">//update</span></span><br><span class="line">    <span class="keyword">this</span>.draw(animator); <span class="comment">// render</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先看看如何更新：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.moveThings= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> speed = <span class="number">.01</span> _ <span class="keyword">this</span>.speedScale /animator.scale;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;<span class="keyword">this</span>.particles.length; i++) &#123;  </span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">this</span>.particles[i];  </span><br><span class="line">        <span class="keyword">if</span> (p.age &gt; <span class="number">0</span> &amp;&amp;<span class="keyword">this</span>.field.inBounds(p.x, p.y)) &#123;  </span><br><span class="line">            <span class="keyword">var</span> a = <span class="keyword">this</span>.field.getValue(p.x,p.y);</span><br><span class="line">            p.x += speed _ a.x;</span><br><span class="line">            p.y += speed * a.y;</span><br><span class="line">            p.age--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="keyword">this</span>.particles[i] = <span class="keyword">this</span>.makeParticle(animator);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上，每一帧都根据速度*时间（帧）=距离来更新所有风粒子位置，同时检测如果 age 为负时，则重新创建一个来替换。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.draw= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> g = <span class="keyword">this</span>.canvas.getContext(<span class="string">'2d'</span>);  </span><br><span class="line">    <span class="keyword">var</span> w = <span class="keyword">this</span>.canvas.width;  </span><br><span class="line">    <span class="keyword">var</span> h = <span class="keyword">this</span>.canvas.height;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.first) &#123;</span><br><span class="line">        g.fillStyle = <span class="keyword">this</span>.background;  </span><br><span class="line">        <span class="keyword">this</span>.first = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        g.fillStyle = <span class="keyword">this</span>.backgroundAlpha;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    g.fillRect(dx, dy, w , h );</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;<span class="keyword">this</span>.particles.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">this</span>.particles[i];</span><br><span class="line">        <span class="keyword">if</span> (p.oldX != <span class="number">-1</span>) &#123;</span><br><span class="line">            g.beginPath();</span><br><span class="line">            g.moveTo(proj.x, proj.y);</span><br><span class="line">            g.lineTo(p.oldX, p.oldY);</span><br><span class="line">            g.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        p.oldX = proj.x;</span><br><span class="line">        p.oldY = proj.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>因为代码实在太长，给出的是关键步骤，先看后面的 stroke 过程，很明了，在 moveThings 的函数中我们可以得到上一帧的位置和当前帧的风粒子的位置，在这里连接起来形成了一段线。可以想象，随着帧数的增加，在有限的生命周期里面，这个折线就像贪吃蛇一样的增长:0-1-2-3-4……-n，则模拟出风的效果来下图是第一帧和第二帧的截图对比，仔细观察红线上面的那条风，这是前两帧的长度对比,或者在看一下洛杉矶附近的风，增长的比较明显，说明洛杉矶这几天风比较大哦，不信去看天气预报：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/xmy20qy1hj.jpeg?imageView2/2/w/1620" alt></p>
+<p>帧一</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/rciuy62ak8.jpeg?imageView2/2/w/1620" alt></p>
+<p>帧二</p>
+<p>似乎这样就完美了，其实不是的。再一想，这条风有生命周期，到时候怎么从地图上把这条风擦除呢？如果不擦除岂不是就和灰一样堆满了，而且这个风明显有一种渐变的效果，这是怎么做到的？</p>
+<p>这里面是一个很棒的技巧，透明度 backgroundAlpha，这里采用和背景颜色一样的 RGB，但增加一个透明度为 0.02，fillRect 的作用就好比每一帧都贴一层这样的纸在上面，然后在上面画新的，则之前的变的有点暗了，旧的越来越暗，达到一种逼真的效果，同时也很好的处理了新老交替。</p>
+<p>如此，一个基本的风向图就完成了。同样，当你以为一切都明了的时候，问题才刚刚开始。简单说一下下面两个要点：实时数据和 WebGL 渲染。WebGL 介绍有一些入门要求，可能不太容易明白，主要是气质（思路）。</p>
+<h2 id="实时数据"><a href="#实时数据" class="headerlink" title="实时数据"></a><strong>实时数据</strong></h2><p>代码读多了，上个段子环节一下氛围。上面例子的作者自称艺术家，想要用新的方式来思考数据，感受数据的美与乐趣。于是有了这个风向图，确实是一个很有趣的效果，但有一点不足点，作者主要是为了寻找数据的美，并没有提供一个有效的大数据实时性的方案。换句话说，这个范例还是处于看看而已的程度。一个风向图，你当然希望能在地图上实时的看到具体一个区域的风向和全球的整体效果，这就需要解决数据的高效传输。</p>
+<p>下面这个例子则较好的考虑了这个问题，windytv 的作者是一位跳伞爱好者，每次跳伞前都要观察天气状况，特别是风向，于是乎就想到了这样一个风向图的应用。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/todyfxvalw.jpeg?imageView2/2/w/1620" alt></p>
+<p>如上是该网站的一个功能罗列，数据还是非常全的，数据来源是 GFS / NCEP / US National Weather Service，我发现里面的天气数据还是很全，而且风向只是其中一个部分（我相信以后国外的开放大数据+HTML5 下会有很多服务慢慢普及，不要错过哦）。在程序中，风向图的数据格式为 epak 的二进制格式,也是使用 ArrayBuffer 的方式来传输和解析的，对这块有兴趣的可以看看之前写的《ArrayBuffer 简析》。</p>
+<p>还有一种很不错的方式就是图片：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/no4mx4a4sp.jpeg?imageView2/2/w/1620" alt></p>
+<p>注意上面黑条，其实是有八个像素的冗余，里面主要就是高宽，数据采集时间等信息，剩下的是一个全国范围的 360*180 的风向量数据。虽然该数据也不算是实时的，但可以实现六小时的更新，关键是可以进行高效的数据传输解析。</p>
+<p>另外，用图片的好处是可以切片，比如精度不高下可以是全球的风向数据，精度高的时候，则可以更新局部的切片数据，和地图切片的思路完全一样，即避免插值的工作量，也可以更清晰的显示数据。因此，这可以算是对第一个范例一个很好的优化。另外，还是开源的哦，自己去找吧。</p>
+<h2 id="WebGL"><a href="#WebGL" class="headerlink" title="WebGL"></a><strong>WebGL</strong></h2><p>百度的风向图虽然很耗性能，但确实技术上有很多值得学习的地方，毕竟用 WebGL 渲染，它是如何实现生命周期和向量场的计算，还是有很多创新点。简单说一下几个关键处，能力有限，而且确实需要有一定的 WebGL 和 OpenGL 的了解，所以希望不要深究，注重别人的思路和方法即可。</p>
+<p>先看看百度对外提供的接口使用方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">surfaceLayers:[&#123;</span><br><span class="line">    type: <span class="string">'particle'</span>,</span><br><span class="line">    distance: <span class="number">3</span>,</span><br><span class="line">    size: [<span class="number">4096</span>, <span class="number">2048</span>],</span><br><span class="line">    particle: &#123;</span><br><span class="line">        vectorField: field,</span><br><span class="line">        color: <span class="string">'white'</span>,</span><br><span class="line">        speedScaling: <span class="number">1</span>,</span><br><span class="line">        sizeScaling: <span class="number">1</span>,</span><br><span class="line">        number: <span class="number">512</span> * <span class="number">512</span>,</span><br><span class="line">        motionBlurFactor: <span class="number">0.99</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>用法比较简单，也是制定一个 particle，里面传入向量场数据，number 则是一帧中风的最大数，后面都是内部来控制。Echart-x 的代码稍微有点乱，最后我是用全局搜索才找到实现代码的。</p>
+<h3 id="Map3d"><a href="#Map3d" class="headerlink" title="Map3d"></a><strong>Map3d</strong></h3><p>负责图层创建和初始化的相关工作。</p>
+<p>首先，当向量数据输入后，生成为一张等宽高的纹理 vectorFieldTexture，每一个向量（X，Y）就是该纹理上的一个点（RGBA），其中 X = R， Y = G， B=0 ，A=255.。则该纹理中每一个像素可以获取它的速度向量。</p>
+<p>然后每一帧都会调用该图层的 UpDate 来更新渲染。</p>
+<h3 id="VectorFieldParticleSurface-这个就是一个风向图图层，记录风向图图层中的关键属性，关键是-update-函数，每一帧负责驱动状态更新。"><a href="#VectorFieldParticleSurface-这个就是一个风向图图层，记录风向图图层中的关键属性，关键是-update-函数，每一帧负责驱动状态更新。" class="headerlink" title="VectorFieldParticleSurface 这个就是一个风向图图层，记录风向图图层中的关键属性，关键是 update 函数，每一帧负责驱动状态更新。"></a>VectorFieldParticleSurface 这个就是一个风向图图层，记录风向图图层中的关键属性，关键是 update 函数，每一帧负责驱动状态更新。</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">update: <span class="function"><span class="keyword">function</span>(<span class="params">deltaTime</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>._particlePass.setUniform(<span class="string">'velocityTexture'</span>,<span class="keyword">this</span>.vectorFieldTexture);</span><br><span class="line"></span><br><span class="line">    particlePass.attachOutput(<span class="keyword">this</span>._particleTexture1);</span><br><span class="line">    particlePass.setUniform(<span class="string">'particleTexture'</span>, <span class="keyword">this</span>._particleTexture0);</span><br><span class="line">    particlePass.setUniform(<span class="string">'deltaTime'</span>, deltaTime);</span><br><span class="line">    particlePass.setUniform(<span class="string">'elapsedTime'</span>, <span class="keyword">this</span>._elapsedTime);</span><br><span class="line">    particlePass.render(<span class="keyword">this</span>.renderer,frameBuffer);</span><br><span class="line">    <span class="keyword">this</span>._particleMesh.material.set(<span class="string">'particleTexture'</span>,<span class="keyword">this</span>._particleTexture1);</span><br><span class="line"></span><br><span class="line">    frameBuffer.attach(<span class="keyword">this</span>.renderer.gl, <span class="keyword">this</span>._thisFrameTexture);</span><br><span class="line">    frameBuffer.bind(<span class="keyword">this</span>.renderer);</span><br><span class="line">    <span class="keyword">this</span>.renderer.render(<span class="keyword">this</span>._scene,<span class="keyword">this</span>._camera);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见，里面 Render 了两次，第一次是渲染到纹理（Render To Texture），其中还有一些时间参数，第二次才是渲染到场景。</p>
+<p>这是在更新数据，将每一点对应的速度向量和位置参数传给 shader，而真正的运算都通过 Shader，直接操作显卡来完成渲染过程。参数准备完毕，结合下面的渲染过程来具体理解。</p>
+<h3 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a><strong>Shader</strong></h3><p>首先在 ecx.vfParticle.particle.fragment 片元着色器：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec4</span> p =<span class="built_in">texture2D</span>(particleTexture, v_Texcoord);</span><br><span class="line"><span class="keyword">if</span> (p.w &gt; <span class="number">0.0</span>) &#123;</span><br><span class="line">    <span class="type">vec4</span> vTex = <span class="built_in">texture2D</span>(velocityTexture,p.xy);</span><br><span class="line">    <span class="type">vec2</span> v = vTex.xy;</span><br><span class="line">    v = (v - <span class="number">0.5</span>) * <span class="number">2.0</span>;</span><br><span class="line">    p.z = <span class="built_in">length</span>(v);</span><br><span class="line">    p.xy += v * deltaTime / <span class="number">50.0</span> *speedScaling; <span class="comment">// Make the particle surface seamless</span></span><br><span class="line">    p.xy = <span class="built_in">fract</span>(p.xy);</span><br><span class="line">    p.w -= deltaTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">gl_FragColor</span> = p;</span><br></pre></td></tr></table></figure>
+
+<p>你会看到除了语法和 JS 的不同，里面的思路是一样的，首先从’velocityTexture’里面得到 xy，该纹理就是向量场中的信息，每一个点则对应的是速度向量，而 w 则表示生命周期。经过计算后把值赋给了 particleTexture</p>
+<p>然后呢，如果你看懂了，就是如梦初醒的时候了，原来每一帧中，particleTexture 里面每一个点对应了当前风的位置，在 particle.fragment 中更新每一个点的位置，然后最终在场景中渲染出来。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">voidmain()&#123;</span><br><span class="line">    <span class="type">vec4</span> p = <span class="built_in">texture2D</span>(particleTexture,texcoord);</span><br><span class="line">    <span class="built_in">gl_Position</span> = worldViewProjection _vec4(p.xy _ <span class="number">2.0</span> - <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个 WebGL 渲染风向图的大致思路，说的很不详细，关键是思路。技术的钻研，只要精益求精，总会有所收获。在这个过程中，我先想到风向图怎么实现的，等看明白了又想看看其他的脚本有何不同处，发现了数据实时性，也看到了百度的 WebGL 渲染的方式，可能也会有疏漏的地方，但总体感觉收获很大，面纱揭开后，也不再神秘。或者换句话说，风场，水流，重力场都可以按照这种方式来实现，只是计算公式上稍微调整一下就可以。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/数据可视化/数据可视化之热力图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/数据可视化/数据可视化之热力图/" class="post-title-link" itemprop="url">数据可视化之热力图</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-16 01:23:09" itemprop="dateCreated datePublished" datetime="2017-12-16T01:23:09+08:00">2017-12-16</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据可视化/" itemprop="url" rel="index"><span itemprop="name">数据可视化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149060" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
+<p>最近看了一下百度的热力图，通过百度地图，确实是一个实时大数据渲染的一个形象表达形式，正好借这个机会学习一下，刚买的机械键盘，发现有两个好处：每天不写点代码（或调试），感觉对不起这价钱啊，估计我之前买的所有键盘+鼠标花费总和都不如这个键盘贵；其次就是控制自己不再吃零食了，怕掉进键盘里心疼啊。</p>
+<p>好了，热力图还是相对比较容易，我们主要讨论如下 3+1 点吧，主要是前三部分，后面只是简单分析一下百度热力图和个人的简单看法。热点图的实现参考了 SuperMap 的热点图和百度 Echarts 的热点图实现。</p>
+<ul>
+<li>原理</li>
+<li>实现</li>
+<li>优化</li>
+<li>百度热力图简述</li>
+</ul>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a><strong>原理</strong></h2><p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/15ty6deq4f.jpeg?imageView2/2/w/1620" alt></p>
+<p>如上是全国范围内的截图，一看就能了解当前中国人口密集度。每个区域的形状不规则，而且还五颜六色。直觉上，我们会觉得每个区域都应该有一个位置点，还应该有一个缓冲范围，然后对这个范围内进行一个渐变效果。这个思路应该还是比较理性的，只是还是无法解释区域的不规则，但抽象了位置点（XY）和渐变（五颜六色）的数据概念。那我们再结合数据，看看我们的推理是否准确。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/kswebdjaq8.png?imageView2/2/w/1620" alt></p>
+<p>这是一个示例数据，可见每一个 HeatPoint 由三部分组成(X,Y,Weight)。这个和我们之前分析的比较类似，每一个热点都有一个位置和权重，权重越大，则该点越显著，也就代表其渐变的一个衰变因素。不规则的区域又是如何形成的？看完代码后发现，是每个热点各管各的，然后相互叠加影响，形成了最终具有真实意义的奇形怪状的热点图。想想也是，不然好看不实用，那热点图的设计也就本末倒置了。另外还有一个半径属性，主要是缓冲区的半径，表示该热点的影响范围，通常我们认为所有热点的影响范围即半径都是一样的，只是权重不同，这也是为了处理的方便。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/swfepmp953.jpeg?imageView2/2/w/1620" alt></p>
+<p>打个比方，下雨天的池塘，每一个雨滴都会引起一个涟漪，这就相当于一个热点，位置不同，雨滴的大小速度质量等并不完全一样，因此具有不同的权重，但在水面上，相互影响，形成了很多不同的形状，而水波的密集度可以用渐变来体现。这样，我们则把每一个个离散点，通过一个缓冲区，转变为连续的面，进而对其进行可视化展现。</p>
+<p>当然，在数据上需要多提一点，实际中，因为热点数据量非常大，所以在不同级别下的数据会有优化，比如全国范围内（大）的数据比较粗略（小），而区域范围内（小）数据精细（大）。这里面有一个抽稀和聚类的处理（个人感觉应该是这个思路），这是数据处理层面的问题，我们下面还是专注可视化方面的问题。</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a><strong>实现</strong></h2><p>这些代码都比较简单，如果你对 canvas 有一定基础，相信也能明白，主要是看思路。首先就是对所有点进行一次筛选和统计，只保留屏幕范围内的热点，并根据权重获取当前最大和最小权重。这样我们获取了一个<code>[minWeight，maxWeight]</code>以及所有需要处理的 drawPoints 数组，为下面的渲染准备好数据。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/bnfn1qv6gb.png?imageView2/2/w/1620" alt></p>
+<p>渲染的过程其实就是对每一个热点权重范围内的点进行颜色的更新，颜色包括两个部分：RGB 和 Alpha。而渲染过程也分为两个过程：权重的计算和权重对应的颜色（RGB + Alpha）。</p>
+<p>首先，权重的计算是一个插值的过程，根据权重值和范围值（距离热点的距离）的算法，你可以根据具体的需要选择合适的算法，而计算主要有两种情况，当前点还没有任何权重值；累加当前点的权重值。点越密，累加后的权重值就越高，则可以用权重值高的风格（红色）突出。其次就是根据权重值获取对应的颜色，这里会有一个颜色表，根据不同的权重值，采用具体的差值算法获取对应的颜色。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/7kzk5chwv6.png?imageView2/2/w/1620" alt></p>
+<p>这样则完成了热点图的渲染，这里需要注意的是，两个 for 循环是对热点的行列的遍历，本身是一个矩阵范围，而热点本身的范围应该是一个圆，因此在 for 循环中需要判断是否在圆内。最终效果如下图：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/p82fks6vzn.jpeg?imageView2/2/w/1620" alt></p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a><strong>优化</strong></h2><p>如上就是热点图的原理和实现，基本上实现都大同小异。不知道你看出来有什么问题了没有？性能！</p>
+<p>这个实现有一个特点，假设有 N 个热点，权重假设是(0,1)之间的平均值 0.5，半径假设为 R(像素单位),那一共要有 N _ 0.5 _ R _ R _ 4（4 个象限），这个计算量是惊人的，和 N 以及 R 的平方是线性增长。另外一个特点，在 for 循环中的规则都是一致的。</p>
+<p>这就让我们想到，如何能够进行优化，答案就是批次和模板。在开始前，我们先说两个技术点。</p>
+<h3 id="Canvas-渐变填充"><a href="#Canvas-渐变填充" class="headerlink" title="Canvas 渐变填充"></a><strong>Canvas 渐变填充</strong></h3><p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/pvrkrq0pt6.png?imageView2/2/w/1620" alt></p>
+<p>如上是伪代码，最终是在 canvas 上绘制了一个圆，但本身是从黑到白的渐变，同时阴影在 x 轴上偏移 d 个像素，这样，该代码生成了如下一张图片，我们称它为权重图，暂时不解释，只需要明白这段代码生成该图的过程即可。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/q3v5y0twj2.png?imageView2/2/w/1620" alt></p>
+<h3 id="Canvas-色带"><a href="#Canvas-色带" class="headerlink" title="Canvas 色带"></a><strong>Canvas 色带</strong></h3><p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/k9xmva56ai.png?imageView2/2/w/1620" alt></p>
+<p>这里主要有两个函数：</p>
+<ul>
+<li>createLinearGradient()创建线性的渐变对象</li>
+<li>addColorStop() 方法规定不同的颜色，以及在 gradient 对象中的何处定位颜色</li>
+</ul>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ssbetfd75i.png?imageView2/2/w/1620" alt></p>
+<p>这样，我们便创建了一个色带，就是如上这样一个效果，当然我们也可以根据自己的需要，定义一个彩色色带，就想我们平时所见的调色板中的颜色色带一样。这里比较宽，主要是给大家看一下效果，真正程序中，宽度只需要一个像素就可以。</p>
+<h3 id="实例化"><a href="#实例化" class="headerlink" title="实例化"></a><strong>实例化</strong></h3><p>不知道大家这时候是否发现了里面的原理和巧妙之处？</p>
+<p>打个比方，我一直想买一个印章，这样每次买书的时候，就不用自己一笔一划的来写了，字写得比人还丑，这可以理解（不过最后还是没买，因为最后连书也买不起了）。假如我有了印章，这样每次就不用自己写了，直接盖章多省事啊，而且还一模一样。</p>
+<p>这里，假设这个章是圆形的，它就是一个模板，对应的就是创建好的渐变填充的纹理。以前我们需要对热点缓冲区内的所有点都进行计算，计算出权重值，现在只需要以该热点为圆心盖一下，则把该热点范围内所有点的权重值都写上去了。</p>
+<p>于是，逐个把所有热点都盖章，这样权重值不是都有了嘛，啪啪啪的声音就是爽。但这有一个问题，热点之间的相互影响怎么处理？这是需要叠加效果的，而不是后盖的章覆盖前者的效果。这里在盖章的时候增加一个透明度的属性，谁的权重大，谁的透明度就小，这样就可以叠加效果了，之前写的风向图的轨迹也是这个思路，还记得吗？下面是逐次盖章（贴图）的代码实现，大家过一遍，都是一个思路。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ujh9t8w135.png?imageView2/2/w/1620" alt></p>
+<p>这样之后，我们就有了一个“热力图”了，不过略有遗憾，因为它是黑白相机拍出来的，都是 0~255 的灰度值，也就是权重信息。这样，我们就需要根据之前创建的色带来对它进行上色的过程了</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/zglpprzsod.png?imageView2/2/w/1620" alt></p>
+<p>可见，通过模板，我们可以极大的减少计算量，渲染也是批次的，而不是逐点赋值。这样我们可以根据不同的算法来创建对应的模板，实现不同的热点风格。下面是百度热力图采用这个方式实现的思路。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/c50xz57pff.jpeg?imageView2/2/w/1620" alt></p>
+<h2 id="百度热力图-amp-总结"><a href="#百度热力图-amp-总结" class="headerlink" title="百度热力图&amp;总结"></a><strong>百度热力图&amp;总结</strong></h2><p>不知不觉又写了这么多，就压缩一下篇幅吧。如下，是百度热力图八小时的请求队列，从 v 的属性可以看出来是小时单位，而 xyz 和地图行列号一致。如果想要叠加百度热力图的，就可以按照这个思路来加载热力图层了。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/7th46qjar2.jpeg?imageView2/2/w/1620" alt></p>
+<p>总体来说，个人觉得有两点收获：1 功能的实现不是完结，而是开始，方能深入掌握其中，就好比一锅汤，精华都在下面，沉得住寂寞，肯定有所收获。2 热力图的技术点都不难，一看便知，但不看还真不知道，这些技术点看起来没关系，但结合好了性能的提升非常明显。所以，见的多了经验就多。</p>
+<p>今天圣诞节了，每年圣诞节我都会买一本书，然后写上”Merry Christmas to me”，然后送给自己，能看到这的人也都是真爱，再唠叨几句吧：昨天听了一个 deliberate practice 的概念，讲的是同等时间下，业余爱好者喜欢不断练习自己熟悉的动作，而专业选手则会专注在自己不熟悉但有机会掌握的动作，这一块在心理学中成为 panic zone，属于你知道，但不精通的部分。个人觉得收获很大，如何更好的发挥时间价值，这也是我，作为一个老人家需要调整的地方。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/" class="post-title-link" itemprop="url">图解 ArrayBuffers 和 SharedArrayBuffers</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-06-20 22:41:53" itemprop="dateCreated datePublished" datetime="2017-06-20T22:41:53+08:00">2017-06-20</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端笔记/" itemprop="url" rel="index"><span itemprop="name">前端笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="ArrayBuffer-是如何工作的"><a href="#ArrayBuffer-是如何工作的" class="headerlink" title="ArrayBuffer 是如何工作的"></a>ArrayBuffer 是如何工作的</h2><p>ArrayBuffer 跟其它 JavaScript 数组差不多，但是不是所有 JavaScript 类型都可以放进去，比如对象、字符串。你唯一可以放进去的只有字节（可以用数字表示）</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/1.png" alt></p>
+<p>需要澄清的一点是，你事实上不是直接把这个字节到 ArrayBuffer 里就行了，ArrayBuffer 并不知道字节有多长，该用多少位去存</p>
+<p>ArrayBuffer 仅仅是一个个 0/1 组成的串，它不知道第一个元素和第二个元素的分割点</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/2.png" alt></p>
+<p>为了提供必要的上下文信息，把 ArrayBuffer 分块，我们需要把它包裹到视图里，这些数据的视图可以通过带类型的数组添加，已经支持很多种类型的数组了</p>
+<p>例如，你可以用一个 Int8 类型的数组把 0/1 串分割成 8 位一组的序列</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/3.png" alt></p>
+<p>或者你可以用一个无符的 Int16 类型数组，把它分割成 16 位一组的序列，可以把它当作无符整型处理</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/4.png" alt></p>
+<p>甚至你可以在同一个基础 buffer 上同时处理多种视图，不同视图在相同操作下会返回不同的结果</p>
+<p>例如，如果我们从某个 ArrayBuffer 的 Int8 视图得到第 0 和第 1 个元素的值，在 Uint16 视图下，第 0 个元素与其有相同二进制位值，但是得到的值也会不一样</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/5.png" alt></p>
+<p>这种方式下，ArrayBuffer 几乎是扮演原始内存角色了，它模拟内存的各种跟 C 语言里类似的操作</p>
+<p>你可能纳闷了，为什么不让开发者直接操纵内存而是采用这个抽象层。因为直接操作内存会有安全风险，这个以后的文章会讲</p>
+<h2 id="什么是-SharedArrayBuffer"><a href="#什么是-SharedArrayBuffer" class="headerlink" title="什么是 SharedArrayBuffer"></a>什么是 SharedArrayBuffer</h2><p>为了说明白 SharedArrayBuffers，我需要稍微解释下并行运行代码和 JavaScript 的关系</p>
+<p>为了更快运行代码或者更更快响应用户事件，你可能会让代码并行运行，为了做到这点，你需要分割工作</p>
+<p>一个典型的应用中，所有的工作都由一个单独的主线程处理，这点我之前提到过……这个主线程就像一个全栈工程师，掌管着 JavaScript、DOM 和 视图</p>
+<p>任何能够从主线程负载减少工作的方法都对代码运行效率有帮助，某些情况下，ArrayBuffers 可以减少大量应该由主线程做的工作</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/6.png" alt></p>
+<p>但是也有些时候减少主线程负载是远远不够的，有时你需要增援，你需要分割你的任务</p>
+<p>大多数语言里，这种分割工作的方法可以使用多线程实现，这就像很多人同时在一个项目里工作。如果你可以完美地把任务分割为多个独立的部分，你可以分给不同的线程，然后，这些线程就同时各种独立执行这些任务</p>
+<p>在 JavaScript 里，你可以借助 web worker 做这种事，这些 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers" target="_blank" rel="noopener">web workers</a> 跟其它语言的线程还是有些区别的，默认它们不能共享内存</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/7.png" alt></p>
+<p>这意味着如果你想分配你的任务给别的线程，你需要完整把任务复制过去，这可以通过 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Worker/postMessage" target="_blank" rel="noopener">postMessage</a> 实现</p>
+<p>postMessage 把你传给它的任何对象都序列化，发送到其它 web worker，然后那边接收后反序列化并放进内存</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/8.png" alt></p>
+<p>这个过程是非常慢的</p>
+<p>某些类型数据（如 ArrayBuffers）你可以通过移动内存的方式实现，这意味着把某个特定区域的内存移过去后其它 web worker 就可以直接访问了</p>
+<p>但是，之前的 web worker 就无法访问了</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/9.png" alt></p>
+<p>对于某些场景这是实用的，但是也有很多场景对性能要求高，你只能使用共享的内存</p>
+<p>而这就是 SharedArrayBuffers 为你提供的</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/10.png" alt></p>
+<p>有了 SharedArrayBuffer 后，多个 web worker 就可以同时读写同一块内存了</p>
+<p>你再也不需要 postMessage 伴有时延的通信了，多个 web worker 对数据访问都没有时延了</p>
+<p>当然，这种同时访问也有风险，会产生竞争条件</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/11.png" alt></p>
+<h2 id="SharedArrayBuffers-支持情况"><a href="#SharedArrayBuffers-支持情况" class="headerlink" title="SharedArrayBuffers 支持情况"></a>SharedArrayBuffers 支持情况</h2><p>所有主流浏览器都将会支持 SharedArrayBuffers</p>
+<p><img src="//kwongdroid.github.io/前端笔记/图解-ArrayBuffers-和-SharedArrayBuffers/12.png" alt></p>
+<p>Safari 10.1 已经支持了，Firefox 和 Chrome 也会很快支持并发布，Edge 会在他们秋季 Windows 更新的时候发布</p>
+<p>即使所有主流浏览器都支持了，我们也不希望开发者直接使用它们，事实上，我们是反对的。你应该只使用更高级的封装好的抽象层接口</p>
+<p>我们期盼的是 JavaScript 库开发者可以提供更简单安全的方法来使用 SharedArrayBuffers</p>
+<p>而且，一旦 SharedArrayBuffers 内置到平台中，WebAssembly 可以通过它实现多线程，到那时候你就可以使用类似 Rust 的多线程语言轻松玩转多线程了</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1334,7 +2175,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1357,7 +2198,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">3</span>
+                      
+                    
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -1388,7 +2231,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">7</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar-180x180.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar-16x16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/avatar.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="本文转载自微信公众号 - LET（LET0-0）  很多人都见过风向图，直观形象，也是地图数据和现实数据在可视化上很好的结合。  这是我见的第一个风向图，记得是 2012 年吧，当时觉得很有意思，作为一名技术人员，自然好奇它是如何做到的，是 Canvas 还是 SVG？但当时没深究。最近正好有人（大哥）提到了这个，不妨深入了解，一探究竟。于是乎，发现原来还有这么多玩法，大同小异，比如说这个，来自">
+<meta name="keywords" content="Canvas,数据可视化,WebGL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据可视化之风向图">
+<meta property="og:url" content="https://kwongdroid.github.io/数据可视化/数据可视化之风向图/index.html">
+<meta property="og:site_name" content="落魄的前端开发">
+<meta property="og:description" content="本文转载自微信公众号 - LET（LET0-0）  很多人都见过风向图，直观形象，也是地图数据和现实数据在可视化上很好的结合。  这是我见的第一个风向图，记得是 2012 年吧，当时觉得很有意思，作为一名技术人员，自然好奇它是如何做到的，是 Canvas 还是 SVG？但当时没深究。最近正好有人（大哥）提到了这个，不妨深入了解，一探究竟。于是乎，发现原来还有这么多玩法，大同小异，比如说这个，来自">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/ebv1r21nbd.gif">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/yt2929jpb3.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/4zareing2j.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/kd2v1r622u.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/9kigiizqv9.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/lwlk34jkfq.png?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/g1iz93y6cj.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/pjdvfunw9c.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/xmy20qy1hj.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/rciuy62ak8.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/todyfxvalw.jpeg?imageView2/2/w/1620">
+<meta property="og:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/no4mx4a4sp.jpeg?imageView2/2/w/1620">
+<meta property="og:updated_time" content="2019-07-07T17:24:14.490Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据可视化之风向图">
+<meta name="twitter:description" content="本文转载自微信公众号 - LET（LET0-0）  很多人都见过风向图，直观形象，也是地图数据和现实数据在可视化上很好的结合。  这是我见的第一个风向图，记得是 2012 年吧，当时觉得很有意思，作为一名技术人员，自然好奇它是如何做到的，是 Canvas 还是 SVG？但当时没深究。最近正好有人（大哥）提到了这个，不妨深入了解，一探究竟。于是乎，发现原来还有这么多玩法，大同小异，比如说这个，来自">
+<meta name="twitter:image" content="https://ask.qcloudimg.com/http-save/yehe-2018236/ebv1r21nbd.gif">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://kwongdroid.github.io/数据可视化/数据可视化之风向图/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>数据可视化之风向图 | 落魄的前端开发</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落魄的前端开发</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/kwongdroid" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/数据可视化/数据可视化之风向图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据可视化之风向图
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-01-03 00:59:57" itemprop="dateCreated datePublished" datetime="2018-01-03T00:59:57+08:00">2018-01-03</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据可视化/" itemprop="url" rel="index"><span itemprop="name">数据可视化</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>本文转载自<a href="https://cloud.tencent.com/developer/article/1149061" target="_blank" rel="noopener">微信公众号 - LET（LET0-0）</a></p>
+</blockquote>
+<p>很多人都见过风向图，直观形象，也是地图数据和现实数据在可视化上很好的结合。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/ebv1r21nbd.gif" alt></p>
+<p>这是我见的第一个风向图，记得是 2012 年吧，当时觉得很有意思，作为一名技术人员，自然好奇它是如何做到的，是 Canvas 还是 SVG？但当时没深究。最近正好有人（大哥）提到了这个，不妨深入了解，一探究竟。于是乎，发现原来还有这么多玩法，大同小异，比如说这个，来自 earth.nullschool.net：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/yt2929jpb3.jpeg?imageView2/2/w/1620" alt></p>
+<p>当然还有来自度娘开源的 echarts-x 的：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/4zareing2j.jpeg?imageView2/2/w/1620" alt></p>
+<p>基本上，这三个效果图基本涵盖了目前风向图的技术点和功能点（我自己的看法，因为 windyty 是基于 earth.nullschool 写的，前者多了一个 worker 线程处理数据，而后者在 github 上开源）。不知道哪一个最对你的胃口？对我而言，图 1 简单易懂，可以快速掌握风向图的实现；图 2 是实时的全球风向数据，而且是二进制格式，是大数据传输的一个方案；图 3 则采用 WebGL 实时渲染，算是大数据渲染的一个方案，所以各有千秋。正好本文就结合这三个例子说一下其中处理好的地方，也是一个由易到难的过程。</p>
+<h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a><strong>原理</strong></h2><p>乍看上去，多少会觉得无从下手。这是怎么做到的？其实吧，懂与不懂就是那一层纸，就看你愿不愿意戳破而已。我们先从数据说起。</p>
+<p>首先介绍一下向量场（Vector Field）的概念。在维基百科的解释是：在向量分析中，向量场是把空间中的每一点指派到一个向量的映射。物理学中的向量场有风场、引力场、电磁场、水流场等等。如图，下面是一个二维的向量场，每一个点都是一个向量。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/kd2v1r622u.jpeg?imageView2/2/w/1620" alt></p>
+<p>当然这是一个抽象的数学概念和表达，物理中的电磁场经常会用到它，在现实中其实也随处可见，比如下面这个有意思的磁场的向量表达，密集恐惧症的人请略过~</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/9kigiizqv9.jpeg?imageView2/2/w/1620" alt></p>
+<p>同理，风场的抽象模型也是一个向量场：每一个点都有一个风速和方向，可以分解为在该点分别在 XY 方向上的向量（我们简化为 XY 两个方向，不考虑 Z，所以可惜不能听《龙卷风》了），则该向量则代表该点 X 方向和 Y 方向的速度。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/lwlk34jkfq.png?imageView2/2/w/1620" alt></p>
+<p>如上图，是一个真实的风向图数据。简单来说，timestamp 代表当前数据的采集时间，（x0，y0，x1，y1）分别是经纬度的范围，而 grid 是该向量场的行列数，field 就是向量场中每一个点的速度值，如果是(0,0)则表示此点风平浪静。可能不同平台的风向图数据有一定差别，但都大同小异。</p>
+<p>向量场和数据格式，直觉上，我们可以知道，就是把这些向量拟合成平滑线，可以形成如下一个真实的风向。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/g1iz93y6cj.jpeg?imageView2/2/w/1620" alt></p>
+<p>如何形成线，而且看上去全球范围内有总不能只有一阵风吧（让我想起了木星的大红斑，这场风在木星已经吹了至少 200 年从来没停过），这揭露了两个问题，1 向量场是离散点，而线是平滑，这里面有一个插值问题；2 更麻烦的是，这些线有好多好多连接的方式，都可以连接成线，有点类似等高线的算法，怎么连，看上去无从下手啊。</p>
+<p>这是我看完数据后，自己觉得要实现风向效果时觉得需要解决的问题，感觉好难啊。怀着这个疑问进入梦乡，第二天 format 了一下 js 脚本，本地调试后，发现我的问题是对的，可是思路是错的。不要一上来就考虑这么多因素，而是基于当前的状态来解决当前的问题，就好比一道非常复杂的代数问题，或许通过几何方式反而可以很简单的解决。</p>
+<p>不多废话了，尽管我觉得这些废话才是提高能力的最有价值的，解决问题不过是一个感悟过程的必然而已。好了，有了数据，看看“神诸葛”如何起风的吧。</p>
+<p>举个例子，给你一个围棋棋盘（向量场），每一个格子就是一个向量，你随手拿一个棋子，随手（随机）放在一个格子上，这就是风的起点。下一回合（下一帧或下一秒），你根据当前格子的向量值（X 值和 Y 值）移动棋子，就是风在当前的风速下拖着常常的尾巴跳到下一个格子上的效果。这样，这个棋子会根据所在格子的向量值不停的移动，直到格子的向量值为零（风停）。</p>
+<p>也就是说只要给一个起点，我就能刮起一股风来。那给你 5000 个棋子（起点），你就能刮起 5000 股风了。当然可能两股气流重叠，这时可能不太符合物理规律了，因为我们的思路下是各吹各的，不过谁关心呢。于是，基于每一帧状态的管理，我们可以很简单的模拟出风向图的效果。很简单巧妙吧。</p>
+<h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>好了，理论上我们知道该怎么做了，看看如何代码实现。我们也整理一下这个流程，把它们模块化。</p>
+<p>今天就和围棋干上了，还是这个例子，首先呢就是数据，也就是棋盘和格子，也就是 Vector 和 Vector Field 这两个对象来方便数据的读取、管理等；其次，当然是棋子了，记录每一个棋子的生命周期，当前的位置，下一步的位置，也就是风上对应的每一个帧的位置信息，这个是 Particle 类来记录这些信息；最后，有了棋盘和棋子，还需要一个推手来落子，这里称作 MotionDisplay 把，负责管理每一回合（帧）下棋子对应棋盘的位置，这个类要做的事情很多：有多少个棋子、哪一个还收回、需要新增几个棋子（风粒子的管理），怎么在棋盘上放置（渲染）；等等，最后还少了一个，就是时钟啊，每一回合可是要读秒的哦，也就是 Animation。感觉例子比喻的很贴切啊，忍不住要放一张棋魂的图片来庆祝一下。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/pjdvfunw9c.jpeg?imageView2/2/w/1620" alt></p>
+<p>还是得上代码，不然显得不专业。下面先把上面提到的这些对象中一些关键的属性和方法说明一下，可以知道哪些关键的属性是由哪些类来管理，而一些关键的方法进行一个说明，大家可以先专注类和函数本身的内容，了解这个拼图的部分内容。最终会有一个初始化的函数来一个整体流程的介绍，这时大家会了解整个拼图的面貌。</p>
+<p>向量比较简单，就是 X 和 Y 两个分量，其他的比如长度，角度这些方法就不在此赘述：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Vector = <span class="function"><span class="keyword">function</span>(<span class="params">x, y</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;</span><br><span class="line">    <span class="keyword">this</span>.y = y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>下面是向量场类读取 JSON 数据并解析：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">VectorField.read= <span class="function"><span class="keyword">function</span>(<span class="params">data, correctForSphere</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> field = [];</span><br><span class="line">    <span class="keyword">var</span> w = data.gridWidth;</span><br><span class="line">    <span class="keyword">var</span> h = data.gridHeight;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="number">0</span>; x &lt; w; x++) &#123;</span><br><span class="line">        field[x] = [];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> y = <span class="number">0</span>; y &lt; h; y++) &#123;</span><br><span class="line">            <span class="keyword">var</span> vx = data.field[i++];</span><br><span class="line">            <span class="keyword">var</span> vy = data.field[i++];</span><br><span class="line">            <span class="keyword">var</span> v = <span class="keyword">new</span> Vector(vx,vy);</span><br><span class="line">            ……</span><br><span class="line">            field[x][y] = v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> result = newVectorField(field,data.x0,data.y0,data.x1,data.y1);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如此，向量场已经布置完善，当然，对照 JSON 数据仔细看一下代码，有保存了经纬度的范围，行和列等信息，当然，该类中有其他几个函数没有在此列出，比如判断一个点是否在棋盘内，另外还有插值，因为每一个网格位置都是离散的，行和列都是整数，而现实中风的走向是连续的，可能在当前时刻的位置是分数，则需要根据临近的整数点的值插值获取当前点的一个近似值，这里采用的是双线性插值，取的周围四个点：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">VectorField.prototype.bilinear= <span class="function"><span class="keyword">function</span>(<span class="params">coord, a, b</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> na = <span class="built_in">Math</span>.floor(a);  </span><br><span class="line">    <span class="keyword">var</span> nb = <span class="built_in">Math</span>.floor(b);  </span><br><span class="line">    <span class="keyword">var</span> ma = <span class="built_in">Math</span>.ceil(a);  </span><br><span class="line">    <span class="keyword">var</span> mb = <span class="built_in">Math</span>.ceil(b);  </span><br><span class="line">    <span class="keyword">var</span> fa = a - na;  </span><br><span class="line">    <span class="keyword">var</span> fb = b - nb;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.field[na][nb][coord] _ (<span class="number">1</span> - fa)_ (<span class="number">1</span> - fb) +</span><br><span class="line">    <span class="keyword">this</span>.field[ma][nb][coord] _ fa _ (<span class="number">1</span> - fb) + <span class="keyword">this</span>.field[na][mb][coord] _ (<span class="number">1</span> - fa) _ fb + <span class="keyword">this</span>.field[ma][mb][coord] _ fa _ fb;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上是向量和向量场的一些关键函数和属性。实现了读取数据，通过 getValue 函数获取任意一个位置（可以使小数）的速度的 X 和 Y 分量。</p>
+<p>下面就是棋子了，每一回合棋子的位置也就是风在每一帧的位置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Particle =<span class="function"><span class="keyword">function</span>(<span class="params">x, y, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.x = x;  </span><br><span class="line">    <span class="keyword">this</span>.y = y;  </span><br><span class="line">    <span class="keyword">this</span>.oldX = <span class="number">-1</span>;  </span><br><span class="line">    <span class="keyword">this</span>.oldY = <span class="number">-1</span>;  </span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如上，XY 是当前的位置，而 old 则是上一帧的位置，age 是它的生命周期，有的时候棋子会被吃，起风了也有风停的那一刻，都是通过 age 来记录它还能活多久（每一帧减一）。</p>
+<p>现在就开始介绍这只下棋的手了，看如何起风如何刮。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">varMotionDisplay = <span class="function"><span class="keyword">function</span>(<span class="params">canvas, imageCanvas, field, numParticles,opt_projection</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>.field = field;  </span><br><span class="line">    <span class="keyword">this</span>.numParticles = numParticles;  </span><br><span class="line">    <span class="keyword">this</span>.x0 = <span class="keyword">this</span>.field.x0;  </span><br><span class="line">    <span class="keyword">this</span>.x1 = <span class="keyword">this</span>.field.x1;  </span><br><span class="line">    <span class="keyword">this</span>.y0 = <span class="keyword">this</span>.field.y0;  </span><br><span class="line">    <span class="keyword">this</span>.y1 = <span class="keyword">this</span>.field.y1;  </span><br><span class="line">    <span class="keyword">this</span>.makeNewParticles(<span class="literal">null</span>, <span class="literal">true</span>);  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>这是它的构造函数，用来记录向量场的信息（范围和速度向量），同时 numParticles 表示粒子数，即同时有多少条风线在地图上显示。projection 用于经纬度和向量场之间的映射换算。最后 makeNewParticles 则会构建 numParticles 个风，并随机赋给它们一个起点和生命周期，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.makeNewParticles= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.particles = [];  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="keyword">this</span>.numParticles;i++) &#123;  </span><br><span class="line">        <span class="keyword">this</span>.particles.push(<span class="keyword">this</span>.makeParticle(animator));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.makeParticle= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="built_in">Math</span>.random();</span><br><span class="line">    <span class="keyword">var</span> b = <span class="built_in">Math</span>.random();  </span><br><span class="line">    <span class="keyword">var</span> x = a * <span class="keyword">this</span>.x0 + (<span class="number">1</span> - a) *<span class="keyword">this</span>.x1;  </span><br><span class="line">    <span class="keyword">var</span> y = b _ <span class="keyword">this</span>.y0 + (<span class="number">1</span> - b) _ <span class="keyword">this</span>.y1;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Particle(x,y,<span class="number">1</span> + <span class="number">40</span> * <span class="built_in">Math</span>.random());  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上是一个简单的创建粒子的过程：随机在经纬度（x，y）创建一个能够存活 1 + 40 *Math.random()帧的风，一共创建 numParticles 个这样的随机风。当然这里为了简单示意。并没有考虑随机数是否会超出范围等特殊情况。</p>
+<p>对象都构建完成了，那每一帧这只手如何主持大局呢？两件事情：Update 和 Render。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.animate= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.moveThings(animator);<span class="comment">//update</span></span><br><span class="line">    <span class="keyword">this</span>.draw(animator); <span class="comment">// render</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>先看看如何更新：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.moveThings= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> speed = <span class="number">.01</span> _ <span class="keyword">this</span>.speedScale /animator.scale;  </span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;<span class="keyword">this</span>.particles.length; i++) &#123;  </span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">this</span>.particles[i];  </span><br><span class="line">        <span class="keyword">if</span> (p.age &gt; <span class="number">0</span> &amp;&amp;<span class="keyword">this</span>.field.inBounds(p.x, p.y)) &#123;  </span><br><span class="line">            <span class="keyword">var</span> a = <span class="keyword">this</span>.field.getValue(p.x,p.y);</span><br><span class="line">            p.x += speed _ a.x;</span><br><span class="line">            p.y += speed * a.y;</span><br><span class="line">            p.age--;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;  </span><br><span class="line">            <span class="keyword">this</span>.particles[i] = <span class="keyword">this</span>.makeParticle(animator);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>如上，每一帧都根据速度*时间（帧）=距离来更新所有风粒子位置，同时检测如果 age 为负时，则重新创建一个来替换。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">MotionDisplay.prototype.draw= <span class="function"><span class="keyword">function</span>(<span class="params">animator</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> g = <span class="keyword">this</span>.canvas.getContext(<span class="string">'2d'</span>);  </span><br><span class="line">    <span class="keyword">var</span> w = <span class="keyword">this</span>.canvas.width;  </span><br><span class="line">    <span class="keyword">var</span> h = <span class="keyword">this</span>.canvas.height;  </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.first) &#123;</span><br><span class="line">        g.fillStyle = <span class="keyword">this</span>.background;  </span><br><span class="line">        <span class="keyword">this</span>.first = <span class="literal">false</span>;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        g.fillStyle = <span class="keyword">this</span>.backgroundAlpha;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    g.fillRect(dx, dy, w , h );</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;<span class="keyword">this</span>.particles.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> p = <span class="keyword">this</span>.particles[i];</span><br><span class="line">        <span class="keyword">if</span> (p.oldX != <span class="number">-1</span>) &#123;</span><br><span class="line">            g.beginPath();</span><br><span class="line">            g.moveTo(proj.x, proj.y);</span><br><span class="line">            g.lineTo(p.oldX, p.oldY);</span><br><span class="line">            g.stroke();</span><br><span class="line">        &#125;</span><br><span class="line">        p.oldX = proj.x;</span><br><span class="line">        p.oldY = proj.y;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>因为代码实在太长，给出的是关键步骤，先看后面的 stroke 过程，很明了，在 moveThings 的函数中我们可以得到上一帧的位置和当前帧的风粒子的位置，在这里连接起来形成了一段线。可以想象，随着帧数的增加，在有限的生命周期里面，这个折线就像贪吃蛇一样的增长:0-1-2-3-4……-n，则模拟出风的效果来下图是第一帧和第二帧的截图对比，仔细观察红线上面的那条风，这是前两帧的长度对比,或者在看一下洛杉矶附近的风，增长的比较明显，说明洛杉矶这几天风比较大哦，不信去看天气预报：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/xmy20qy1hj.jpeg?imageView2/2/w/1620" alt></p>
+<p>帧一</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/rciuy62ak8.jpeg?imageView2/2/w/1620" alt></p>
+<p>帧二</p>
+<p>似乎这样就完美了，其实不是的。再一想，这条风有生命周期，到时候怎么从地图上把这条风擦除呢？如果不擦除岂不是就和灰一样堆满了，而且这个风明显有一种渐变的效果，这是怎么做到的？</p>
+<p>这里面是一个很棒的技巧，透明度 backgroundAlpha，这里采用和背景颜色一样的 RGB，但增加一个透明度为 0.02，fillRect 的作用就好比每一帧都贴一层这样的纸在上面，然后在上面画新的，则之前的变的有点暗了，旧的越来越暗，达到一种逼真的效果，同时也很好的处理了新老交替。</p>
+<p>如此，一个基本的风向图就完成了。同样，当你以为一切都明了的时候，问题才刚刚开始。简单说一下下面两个要点：实时数据和 WebGL 渲染。WebGL 介绍有一些入门要求，可能不太容易明白，主要是气质（思路）。</p>
+<h2 id="实时数据"><a href="#实时数据" class="headerlink" title="实时数据"></a><strong>实时数据</strong></h2><p>代码读多了，上个段子环节一下氛围。上面例子的作者自称艺术家，想要用新的方式来思考数据，感受数据的美与乐趣。于是有了这个风向图，确实是一个很有趣的效果，但有一点不足点，作者主要是为了寻找数据的美，并没有提供一个有效的大数据实时性的方案。换句话说，这个范例还是处于看看而已的程度。一个风向图，你当然希望能在地图上实时的看到具体一个区域的风向和全球的整体效果，这就需要解决数据的高效传输。</p>
+<p>下面这个例子则较好的考虑了这个问题，windytv 的作者是一位跳伞爱好者，每次跳伞前都要观察天气状况，特别是风向，于是乎就想到了这样一个风向图的应用。</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/todyfxvalw.jpeg?imageView2/2/w/1620" alt></p>
+<p>如上是该网站的一个功能罗列，数据还是非常全的，数据来源是 GFS / NCEP / US National Weather Service，我发现里面的天气数据还是很全，而且风向只是其中一个部分（我相信以后国外的开放大数据+HTML5 下会有很多服务慢慢普及，不要错过哦）。在程序中，风向图的数据格式为 epak 的二进制格式,也是使用 ArrayBuffer 的方式来传输和解析的，对这块有兴趣的可以看看之前写的《ArrayBuffer 简析》。</p>
+<p>还有一种很不错的方式就是图片：</p>
+<p><img src="https://ask.qcloudimg.com/http-save/yehe-2018236/no4mx4a4sp.jpeg?imageView2/2/w/1620" alt></p>
+<p>注意上面黑条，其实是有八个像素的冗余，里面主要就是高宽，数据采集时间等信息，剩下的是一个全国范围的 360*180 的风向量数据。虽然该数据也不算是实时的，但可以实现六小时的更新，关键是可以进行高效的数据传输解析。</p>
+<p>另外，用图片的好处是可以切片，比如精度不高下可以是全球的风向数据，精度高的时候，则可以更新局部的切片数据，和地图切片的思路完全一样，即避免插值的工作量，也可以更清晰的显示数据。因此，这可以算是对第一个范例一个很好的优化。另外，还是开源的哦，自己去找吧。</p>
+<h2 id="WebGL"><a href="#WebGL" class="headerlink" title="WebGL"></a><strong>WebGL</strong></h2><p>百度的风向图虽然很耗性能，但确实技术上有很多值得学习的地方，毕竟用 WebGL 渲染，它是如何实现生命周期和向量场的计算，还是有很多创新点。简单说一下几个关键处，能力有限，而且确实需要有一定的 WebGL 和 OpenGL 的了解，所以希望不要深究，注重别人的思路和方法即可。</p>
+<p>先看看百度对外提供的接口使用方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">surfaceLayers:[&#123;</span><br><span class="line">    type: <span class="string">'particle'</span>,</span><br><span class="line">    distance: <span class="number">3</span>,</span><br><span class="line">    size: [<span class="number">4096</span>, <span class="number">2048</span>],</span><br><span class="line">    particle: &#123;</span><br><span class="line">        vectorField: field,</span><br><span class="line">        color: <span class="string">'white'</span>,</span><br><span class="line">        speedScaling: <span class="number">1</span>,</span><br><span class="line">        sizeScaling: <span class="number">1</span>,</span><br><span class="line">        number: <span class="number">512</span> * <span class="number">512</span>,</span><br><span class="line">        motionBlurFactor: <span class="number">0.99</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;]</span><br></pre></td></tr></table></figure>
+
+<p>用法比较简单，也是制定一个 particle，里面传入向量场数据，number 则是一帧中风的最大数，后面都是内部来控制。Echart-x 的代码稍微有点乱，最后我是用全局搜索才找到实现代码的。</p>
+<h3 id="Map3d"><a href="#Map3d" class="headerlink" title="Map3d"></a><strong>Map3d</strong></h3><p>负责图层创建和初始化的相关工作。</p>
+<p>首先，当向量数据输入后，生成为一张等宽高的纹理 vectorFieldTexture，每一个向量（X，Y）就是该纹理上的一个点（RGBA），其中 X = R， Y = G， B=0 ，A=255.。则该纹理中每一个像素可以获取它的速度向量。</p>
+<p>然后每一帧都会调用该图层的 UpDate 来更新渲染。</p>
+<h3 id="VectorFieldParticleSurface-这个就是一个风向图图层，记录风向图图层中的关键属性，关键是-update-函数，每一帧负责驱动状态更新。"><a href="#VectorFieldParticleSurface-这个就是一个风向图图层，记录风向图图层中的关键属性，关键是-update-函数，每一帧负责驱动状态更新。" class="headerlink" title="VectorFieldParticleSurface 这个就是一个风向图图层，记录风向图图层中的关键属性，关键是 update 函数，每一帧负责驱动状态更新。"></a>VectorFieldParticleSurface 这个就是一个风向图图层，记录风向图图层中的关键属性，关键是 update 函数，每一帧负责驱动状态更新。</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">update: <span class="function"><span class="keyword">function</span>(<span class="params">deltaTime</span>) </span>&#123;  </span><br><span class="line">    <span class="keyword">this</span>._particlePass.setUniform(<span class="string">'velocityTexture'</span>,<span class="keyword">this</span>.vectorFieldTexture);</span><br><span class="line"></span><br><span class="line">    particlePass.attachOutput(<span class="keyword">this</span>._particleTexture1);</span><br><span class="line">    particlePass.setUniform(<span class="string">'particleTexture'</span>, <span class="keyword">this</span>._particleTexture0);</span><br><span class="line">    particlePass.setUniform(<span class="string">'deltaTime'</span>, deltaTime);</span><br><span class="line">    particlePass.setUniform(<span class="string">'elapsedTime'</span>, <span class="keyword">this</span>._elapsedTime);</span><br><span class="line">    particlePass.render(<span class="keyword">this</span>.renderer,frameBuffer);</span><br><span class="line">    <span class="keyword">this</span>._particleMesh.material.set(<span class="string">'particleTexture'</span>,<span class="keyword">this</span>._particleTexture1);</span><br><span class="line"></span><br><span class="line">    frameBuffer.attach(<span class="keyword">this</span>.renderer.gl, <span class="keyword">this</span>._thisFrameTexture);</span><br><span class="line">    frameBuffer.bind(<span class="keyword">this</span>.renderer);</span><br><span class="line">    <span class="keyword">this</span>.renderer.render(<span class="keyword">this</span>._scene,<span class="keyword">this</span>._camera);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可见，里面 Render 了两次，第一次是渲染到纹理（Render To Texture），其中还有一些时间参数，第二次才是渲染到场景。</p>
+<p>这是在更新数据，将每一点对应的速度向量和位置参数传给 shader，而真正的运算都通过 Shader，直接操作显卡来完成渲染过程。参数准备完毕，结合下面的渲染过程来具体理解。</p>
+<h3 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a><strong>Shader</strong></h3><p>首先在 ecx.vfParticle.particle.fragment 片元着色器：</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">vec4</span> p =<span class="built_in">texture2D</span>(particleTexture, v_Texcoord);</span><br><span class="line"><span class="keyword">if</span> (p.w &gt; <span class="number">0.0</span>) &#123;</span><br><span class="line">    <span class="type">vec4</span> vTex = <span class="built_in">texture2D</span>(velocityTexture,p.xy);</span><br><span class="line">    <span class="type">vec2</span> v = vTex.xy;</span><br><span class="line">    v = (v - <span class="number">0.5</span>) * <span class="number">2.0</span>;</span><br><span class="line">    p.z = <span class="built_in">length</span>(v);</span><br><span class="line">    p.xy += v * deltaTime / <span class="number">50.0</span> *speedScaling; <span class="comment">// Make the particle surface seamless</span></span><br><span class="line">    p.xy = <span class="built_in">fract</span>(p.xy);</span><br><span class="line">    p.w -= deltaTime;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">gl_FragColor</span> = p;</span><br></pre></td></tr></table></figure>
+
+<p>你会看到除了语法和 JS 的不同，里面的思路是一样的，首先从’velocityTexture’里面得到 xy，该纹理就是向量场中的信息，每一个点则对应的是速度向量，而 w 则表示生命周期。经过计算后把值赋给了 particleTexture</p>
+<p>然后呢，如果你看懂了，就是如梦初醒的时候了，原来每一帧中，particleTexture 里面每一个点对应了当前风的位置，在 particle.fragment 中更新每一个点的位置，然后最终在场景中渲染出来。</p>
+<figure class="highlight glsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">voidmain()&#123;</span><br><span class="line">    <span class="type">vec4</span> p = <span class="built_in">texture2D</span>(particleTexture,texcoord);</span><br><span class="line">    <span class="built_in">gl_Position</span> = worldViewProjection _vec4(p.xy _ <span class="number">2.0</span> - <span class="number">1.0</span>, <span class="number">0.0</span>, <span class="number">1.0</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一个 WebGL 渲染风向图的大致思路，说的很不详细，关键是思路。技术的钻研，只要精益求精，总会有所收获。在这个过程中，我先想到风向图怎么实现的，等看明白了又想看看其他的脚本有何不同处，发现了数据实时性，也看到了百度的 WebGL 渲染的方式，可能也会有疏漏的地方，但总体感觉收获很大，面纱揭开后，也不再神秘。或者换句话说，风场，水流，重力场都可以按照这种方式来实现，只是计算公式上稍微调整一下就可以。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>kwongdroid</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://kwongdroid.github.io/数据可视化/数据可视化之风向图/" title="数据可视化之风向图">https://kwongdroid.github.io/数据可视化/数据可视化之风向图/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Canvas/" rel="tag"><i class="fa fa-tag"></i> Canvas</a>
+          
+            <a href="/tags/数据可视化/" rel="tag"><i class="fa fa-tag"></i> 数据可视化</a>
+          
+            <a href="/tags/WebGL/" rel="tag"><i class="fa fa-tag"></i> WebGL</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/数据可视化/数据可视化之热力图/" rel="next" title="数据可视化之热力图">
+                <i class="fa fa-chevron-left"></i> 数据可视化之热力图
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/数据可视化/数据可视化之Earth-NullSchool/" rel="prev" title="数据可视化之Earth NullSchool">
+                数据可视化之Earth NullSchool <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="kwongdroid">
+            
+              <p class="site-author-name" itemprop="name">kwongdroid</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">11</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/kwongdroid" title="GitHub &rarr; https://github.com/kwongdroid" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="mailto:kwongdroid@qq.com" title="E-Mail &rarr; mailto:kwongdroid@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/kwongdroid" title="Weibo &rarr; https://weibo.com/kwongdroid" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#原理"><span class="nav-number">1.</span> <span class="nav-text">原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何实现"><span class="nav-number">2.</span> <span class="nav-text">如何实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实时数据"><span class="nav-number">3.</span> <span class="nav-text">实时数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebGL"><span class="nav-number">4.</span> <span class="nav-text">WebGL</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Map3d"><span class="nav-number">4.1.</span> <span class="nav-text">Map3d</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VectorFieldParticleSurface-这个就是一个风向图图层，记录风向图图层中的关键属性，关键是-update-函数，每一帧负责驱动状态更新。"><span class="nav-number">4.2.</span> <span class="nav-text">VectorFieldParticleSurface 这个就是一个风向图图层，记录风向图图层中的关键属性，关键是 update 函数，每一帧负责驱动状态更新。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shader"><span class="nav-number">4.3.</span> <span class="nav-text">Shader</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kwongdroid</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="255,0,0" opacity="0.8" zindex="-1" count="66" src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click-heart.js"></script>
+</body>
+</html>
