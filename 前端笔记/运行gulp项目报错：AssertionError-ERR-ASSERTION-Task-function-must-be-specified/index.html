@@ -77,7 +77,7 @@
     fastclick: false,
     lazyload: false,
     tabs: true,
-    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -94,18 +94,18 @@
 
 
 
-  <meta name="description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at Gul">
-<meta name="keywords" content="javascript,gulp">
+  <meta name="description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用 gulp bulid 压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at G">
+<meta name="keywords" content="JavaScript,Gulp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="运行gulp项目报错：AssertionError [ERR_ASSERTION]: Task function must be specified">
 <meta property="og:url" content="https://kwongdroid.github.io/前端笔记/运行gulp项目报错：AssertionError-ERR-ASSERTION-Task-function-must-be-specified/index.html">
 <meta property="og:site_name" content="落魄的前端开发">
-<meta property="og:description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at Gul">
+<meta property="og:description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用 gulp bulid 压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at G">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-07T18:08:37.353Z">
+<meta property="og:updated_time" content="2019-07-08T13:38:42.368Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="运行gulp项目报错：AssertionError [ERR_ASSERTION]: Task function must be specified">
-<meta name="twitter:description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at Gul">
+<meta name="twitter:description" content="今天写了一篇文章正准备发布，生成静态资源文件后使用 gulp bulid 压缩代码，但是一运行：gulp 出现了这个错误： 12345678910111213141516$ gulp buildassert.js:339    throw err;    ^AssertionError [ERR_ASSERTION]: Task function must be specified    at G">
 
 
 
@@ -238,7 +238,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">15</span></a>
 
   </li>
         
@@ -256,7 +256,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
 
   </li>
         
@@ -274,7 +274,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
 
   </li>
 
@@ -437,6 +437,14 @@
           
 
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
 
           <br>
           
@@ -458,19 +466,19 @@
       
 
       
-        <p>今天写了一篇文章正准备发布，生成静态资源文件后使用gulp bulid压缩代码，但是一运行：<code>gulp</code> 出现了这个错误：</p>
+        <p>今天写了一篇文章正准备发布，生成静态资源文件后使用 gulp bulid 压缩代码，但是一运行：<code>gulp</code> 出现了这个错误：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">$ gulp build</span><br><span class="line">assert.js:339</span><br><span class="line">    throw err;</span><br><span class="line">    ^</span><br><span class="line"></span><br><span class="line">AssertionError [ERR_ASSERTION]: Task <span class="keyword">function</span> must be specified</span><br><span class="line">    at Gulp.set [as _setTask] (E:\Documents\GitHub\blog\node_modules\undertaker\lib\<span class="built_in">set</span>-task.js:10:3)</span><br><span class="line">    at Gulp.task (E:\Documents\GitHub\blog\node_modules\undertaker\lib\task.js:13:8)</span><br><span class="line">    at Object.&lt;anonymous&gt; (E:\Documents\GitHub\blog\gulpfile.js:43:6)</span><br><span class="line">    at Module._compile (internal/modules/cjs/loader.js:776:30)</span><br><span class="line">    at Object.Module._extensions..js (internal/modules/cjs/loader.js:787:10)</span><br><span class="line">    at Module.load (internal/modules/cjs/loader.js:653:32)</span><br><span class="line">    at tryModuleLoad (internal/modules/cjs/loader.js:593:12)</span><br><span class="line">    at Function.Module._load (internal/modules/cjs/loader.js:585:3)</span><br><span class="line">    at Module.require (internal/modules/cjs/loader.js:690:17)</span><br><span class="line">    at require (internal/modules/cjs/helpers.js:25:18)</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>gulp项目需要全局安装gulp和项目内安装gulp</p>
+<p>gulp 项目需要全局安装 gulp 和项目内安装 gulp</p>
 </blockquote>
-<p>通过 <code>gulp -v</code> 查看全局gulp 和本地项目的gulp版本：</p>
+<p>通过 <code>gulp -v</code> 查看全局 gulp 和本地项目的 gulp 版本：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ gulp -v</span><br><span class="line">CLI version: 3.9.1</span><br><span class="line">Local version: 4.0.2</span><br></pre></td></tr></table></figure>
 
-<p>查看package.json文件果然：<code>&quot;gulp&quot;: &quot;^4.0.2&quot;,</code></p>
-<p>因为本地的gulp更新到了版本4，而gulpfile.js用的是gulp3.9.1的语法</p>
-<h4 id="解决方案一："><a href="#解决方案一：" class="headerlink" title="解决方案一："></a>解决方案一：</h4><p><code>npm i gulp@3.9.1</code> 重新安装gulp到3.9.1版</p>
-<h4 id="解决方案二："><a href="#解决方案二：" class="headerlink" title="解决方案二："></a>解决方案二：</h4><p>按gulp4的语法重写gulpfile.js任务列表</p>
+<p>查看 package.json 文件果然：<code>&quot;gulp&quot;: &quot;^4.0.2&quot;,</code></p>
+<p>因为本地的 gulp 更新到了版本 4，而 gulpfile.js 用的是 gulp3.9.1 的语法</p>
+<h4 id="解决方案一："><a href="#解决方案一：" class="headerlink" title="解决方案一："></a>解决方案一：</h4><p><code>npm i gulp@3.9.1</code> 重新安装 gulp 到 3.9.1 版</p>
+<h4 id="解决方案二："><a href="#解决方案二：" class="headerlink" title="解决方案二："></a>解决方案二：</h4><p>按 gulp4 的语法重写 gulpfile.js 任务列表</p>
 
       
     </div>
@@ -521,9 +529,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
           
-            <a href="/tags/gulp/" rel="tag"><i class="fa fa-tag"></i> gulp</a>
+            <a href="/tags/Gulp/" rel="tag"><i class="fa fa-tag"></i> Gulp</a>
           
         </div>
       
@@ -619,7 +627,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -644,7 +652,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -683,7 +693,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -793,6 +811,16 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+
+  
+</div>
+
 
 
 

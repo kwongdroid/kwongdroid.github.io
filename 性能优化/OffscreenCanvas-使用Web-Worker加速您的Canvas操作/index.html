@@ -77,7 +77,7 @@
     fastclick: false,
     lazyload: false,
     tabs: true,
-    motion: {"enable":true,"async":true,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -94,21 +94,21 @@
 
 
 
-  <meta name="description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
+  <meta name="description" content="现在，您可以使用 OffscreenCanvas 从主线程渲染图形！ Canvas 是一种在屏幕上绘制各种图形的流行方式，也是 WebGL 世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在 JavaScript 中。这赋予画布很大的灵活性。">
 <meta name="keywords" content="Canvas,OffscreenCanvas,Web Worker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OffscreenCanvas - 使用Web Worker加速您的Canvas操作">
 <meta property="og:url" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/index.html">
 <meta property="og:site_name" content="落魄的前端开发">
-<meta property="og:description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
+<meta property="og:description" content="现在，您可以使用 OffscreenCanvas 从主线程渲染图形！ Canvas 是一种在屏幕上绘制各种图形的流行方式，也是 WebGL 世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在 JavaScript 中。这赋予画布很大的灵活性。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png">
 <meta property="og:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/2.png">
 <meta property="og:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/3.png">
-<meta property="og:updated_time" content="2019-07-07T16:33:39.549Z">
+<meta property="og:updated_time" content="2019-07-08T13:38:42.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OffscreenCanvas - 使用Web Worker加速您的Canvas操作">
-<meta name="twitter:description" content="现在，您可以使用OffscreenCanvas从主线程渲染图形！ Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。 同时，在现代">
+<meta name="twitter:description" content="现在，您可以使用 OffscreenCanvas 从主线程渲染图形！ Canvas 是一种在屏幕上绘制各种图形的流行方式，也是 WebGL 世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。 它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在 JavaScript 中。这赋予画布很大的灵活性。">
 <meta name="twitter:image" content="https://kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png">
 
 
@@ -242,7 +242,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">11</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">15</span></a>
 
   </li>
         
@@ -260,7 +260,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">4</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">5</span></a>
 
   </li>
         
@@ -278,7 +278,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">12</span></a>
 
   </li>
 
@@ -441,6 +441,14 @@
           
 
           
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
 
           <br>
           
@@ -462,41 +470,41 @@
       
 
       
-        <p>现在，您可以使用OffscreenCanvas从主线程渲染图形！</p>
-<p>Canvas是一种在屏幕上绘制各种图形的流行方式，也是WebGL世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。</p>
-<p>它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在JavaScript中。这赋予画布很大的灵活性。</p>
+        <p>现在，您可以使用 OffscreenCanvas 从主线程渲染图形！</p>
+<p>Canvas 是一种在屏幕上绘制各种图形的流行方式，也是 WebGL 世界的切入点。它可用于绘制形状，图像，运行动画，甚至显示和处理视频内容。它通常用于在富媒体网络应用程序和在线游戏中创建出色的用户体验。</p>
+<p>它是可编写脚本的，这意味着画布上绘制的内容可以通过编程方式创建，例如，在 JavaScript 中。这赋予画布很大的灵活性。</p>
 <p>同时，在现代网站中，脚本执行是用户响应问题最常见的 来源之一。因为画布逻辑和渲染发生在与用户交互相同的线程上，动画中涉及的（有时很重）计算会损害应用程序的真实和感知性能。</p>
 <p>幸运的是，OffscreenCanvas 是对这种威胁的回应！</p>
-<p>到目前为止，画布绘制功能与<code>&lt;canvas&gt;</code>元素绑定，这意味着它直接取决于DOM。顾名思义，OffscreenCanvas通过将其移出屏幕来解耦DOM和Canvas API。</p>
-<p>由于这种解耦，OffscreenCanvas的渲染与DOM完全分离，因此在常规画布上提供了一些速度提升，因为两者之间没有同步。但更重要的是，它可以在Web Worker中使用，即使没有可用的DOM。这可以实现各种有趣的用例。</p>
-<h2 id="在Worker中使用OffscreenCanvas"><a href="#在Worker中使用OffscreenCanvas" class="headerlink" title="在Worker中使用OffscreenCanvas"></a>在Worker中使用OffscreenCanvas</h2><p>Worker 是网络的线程版本 - 它们允许您在后台运行任务。将一些脚本移动到Worker可以为应用程序提供更多空间，以便在主线程上执行用户关键任务。到目前为止，没有办法在Worker中使用Canvas API，因为没有可用的DOM。</p>
-<p>OffscreenCanvas不依赖于DOM，因此可以使用它。在这里，我使用OffscreenCanvas来计算worker中的渐变颜色：</p>
+<p>到目前为止，画布绘制功能与<code>&lt;canvas&gt;</code>元素绑定，这意味着它直接取决于 DOM。顾名思义，OffscreenCanvas 通过将其移出屏幕来解耦 DOM 和 Canvas API。</p>
+<p>由于这种解耦，OffscreenCanvas 的渲染与 DOM 完全分离，因此在常规画布上提供了一些速度提升，因为两者之间没有同步。但更重要的是，它可以在 Web Worker 中使用，即使没有可用的 DOM。这可以实现各种有趣的用例。</p>
+<h2 id="在-Worker-中使用-OffscreenCanvas"><a href="#在-Worker-中使用-OffscreenCanvas" class="headerlink" title="在 Worker 中使用 OffscreenCanvas"></a>在 Worker 中使用 OffscreenCanvas</h2><p>Worker 是网络的线程版本 - 它们允许您在后台运行任务。将一些脚本移动到 Worker 可以为应用程序提供更多空间，以便在主线程上执行用户关键任务。到目前为止，没有办法在 Worker 中使用 Canvas API，因为没有可用的 DOM。</p>
+<p>OffscreenCanvas 不依赖于 DOM，因此可以使用它。在这里，我使用 OffscreenCanvas 来计算 worker 中的渐变颜色：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// file: worker.js</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getGradientColor</span>(<span class="params">percent</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> canvas = <span class="keyword">new</span> OffscreenCanvas(<span class="number">100</span>, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</span><br><span class="line">    <span class="keyword">const</span> gradient = ctx.createLinearGradient(<span class="number">0</span>, <span class="number">0</span>, canvas.width, <span class="number">0</span>);</span><br><span class="line">    gradient.addColorStop(<span class="number">0</span>, <span class="string">'red'</span>);</span><br><span class="line">    gradient.addColorStop(<span class="number">1</span>, <span class="string">'blue'</span>);</span><br><span class="line">    ctx.fillStyle = gradient;</span><br><span class="line">    ctx.fillRect(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> imgd = ctx.getImageData(<span class="number">0</span>, <span class="number">0</span>, ctx.canvas.width, <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> colors = imgd.data.slice(percent * <span class="number">4</span>, percent * <span class="number">4</span> + <span class="number">4</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`rgba(<span class="subst">$&#123;colors[<span class="number">0</span>]&#125;</span>, <span class="subst">$&#123;colors[<span class="number">1</span>]&#125;</span>, <span class="subst">$&#123;colors[<span class="number">2</span>]&#125;</span>, <span class="subst">$&#123;colors[])<span class="string">`;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">&#125;</span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string"></span></span></span></span><br><span class="line"><span class="string"><span class="subst"><span class="string">getGradientColor(40);  // rgba(152, 0, 104, 255 )</span></span></span></span><br></pre></td></tr></table></figure>
 
-<h2 id="取消阻止主线程"><a href="#取消阻止主线程" class="headerlink" title="取消阻止主线程"></a>取消阻止主线程</h2><p>将大量计算移动到Worker时，可以释放主线程上的大量资源，这会变得更加有趣。我们可以使用transferControlToOffscreen 方法将常规画布镜像到OffscreenCanvas实例。应用于OffscreenCanvas的操作将自动在源画布上呈现。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offscreen = <span class="built_in">document</span>.querySelector(<span class="string">'canvas'</span>).transferControlToOffscreen();</span><br><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">'myworkerurl.js'</span>);</span><br><span class="line">worker.postMessage(&#123; <span class="attr">canvas</span>: offscreen &#125;, [offscreen]);</span><br></pre></td></tr></table></figure>
+<h2 id="取消阻止主线程"><a href="#取消阻止主线程" class="headerlink" title="取消阻止主线程"></a>取消阻止主线程</h2><p>将大量计算移动到 Worker 时，可以释放主线程上的大量资源，这会变得更加有趣。我们可以使用 transferControlToOffscreen 方法将常规画布镜像到 OffscreenCanvas 实例。应用于 OffscreenCanvas 的操作将自动在源画布上呈现。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> offscreen = <span class="built_in">document</span>.querySelector(<span class="string">"canvas"</span>).transferControlToOffscreen();</span><br><span class="line"><span class="keyword">const</span> worker = <span class="keyword">new</span> Worker(<span class="string">"myworkerurl.js"</span>);</span><br><span class="line">worker.postMessage(&#123; <span class="attr">canvas</span>: offscreen &#125;, [offscreen]);</span><br></pre></td></tr></table></figure>
 
 <blockquote>
-<p>OffscreenCanvas是可转让的。除了将其指定为消息中的字段之外，还需要将其作为postMessage（转移）中的第二个参数传递，以便可以在Worker上下文中使用它。</p>
+<p>OffscreenCanvas 是可转让的。除了将其指定为消息中的字段之外，还需要将其作为 postMessage（转移）中的第二个参数传递，以便可以在 Worker 上下文中使用它。</p>
 </blockquote>
-<p>在下面的示例中，当颜色主题发生变化时会发生“繁重计算” - 即使在快速桌面上也应该花费几毫秒。您可以选择在主线程或Worker线程上运行动画。在主线程的情况下，当繁重的任务运行时，您无法与按钮交互 - 线程被阻止。对于Worker，对UI响应性没有影响。</p>
+<p>在下面的示例中，当颜色主题发生变化时会发生“繁重计算” - 即使在快速桌面上也应该花费几毫秒。您可以选择在主线程或 Worker 线程上运行动画。在主线程的情况下，当繁重的任务运行时，您无法与按钮交互 - 线程被阻止。对于 Worker，对 UI 响应性没有影响。</p>
 <p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/1.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/keep-ui-responsive.html" target="_blank" rel="noopener">示例：keep-ui-responsive</a></p>
-<p>它也是另一种方式：繁忙的主线程不会影响在worker上运行的动画。尽管有主要的线程流量，您仍可以使用此功能来避免视觉抖动并保证流畅的动画：</p>
+<p>它也是另一种方式：繁忙的主线程不会影响在 worker 上运行的动画。尽管有主要的线程流量，您仍可以使用此功能来避免视觉抖动并保证流畅的动画：</p>
 <p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/2.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/index.html" target="_blank" rel="noopener">示例</a></p>
-<p>在常规画布的情况下，当主线程被人为地过度工作时动画停止，而基于Worker的OffscreenCanvas播放顺利。</p>
-<h2 id="与流行的库一起使用"><a href="#与流行的库一起使用" class="headerlink" title="与流行的库一起使用"></a>与流行的库一起使用</h2><p>由于OffscreenCanvas API通常与常规Canvas元素兼容，因此您可以轻松地将其用作渐进增强功能，也可以使用市场上的一些领先图形库。</p>
-<p>例如，您可以对其进行功能检测，如果可用，通过在渲染器构造函数中指定canvas选项将其与Three.js一起使用：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvasEl = <span class="built_in">document</span>.querySelector(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> canvas = (<span class="string">'OffscreenCanvas'</span> <span class="keyword">in</span> <span class="built_in">window</span>) ? canvasEl.transferControlToOffscreen() : canvasEl;</span><br><span class="line">canvas.style = &#123; <span class="attr">width</span>: <span class="number">0</span>, <span class="attr">height</span>: <span class="number">0</span> &#125;</span><br><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123; <span class="attr">canvas</span>: canvas &#125;);</span><br></pre></td></tr></table></figure>
+<p>在常规画布的情况下，当主线程被人为地过度工作时动画停止，而基于 Worker 的 OffscreenCanvas 播放顺利。</p>
+<h2 id="与流行的库一起使用"><a href="#与流行的库一起使用" class="headerlink" title="与流行的库一起使用"></a>与流行的库一起使用</h2><p>由于 OffscreenCanvas API 通常与常规 Canvas 元素兼容，因此您可以轻松地将其用作渐进增强功能，也可以使用市场上的一些领先图形库。</p>
+<p>例如，您可以对其进行功能检测，如果可用，通过在渲染器构造函数中指定 canvas 选项将其与 Three.js 一起使用：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> canvasEl = <span class="built_in">document</span>.querySelector(<span class="string">"canvas"</span>);</span><br><span class="line"><span class="keyword">const</span> canvas =</span><br><span class="line">  <span class="string">"OffscreenCanvas"</span> <span class="keyword">in</span> <span class="built_in">window</span></span><br><span class="line">    ? canvasEl.transferControlToOffscreen()</span><br><span class="line">    : canvasEl;</span><br><span class="line">canvas.style = &#123; <span class="attr">width</span>: <span class="number">0</span>, <span class="attr">height</span>: <span class="number">0</span> &#125;;</span><br><span class="line"><span class="keyword">const</span> renderer = <span class="keyword">new</span> THREE.WebGLRenderer(&#123; <span class="attr">canvas</span>: canvas &#125;);</span><br></pre></td></tr></table></figure>
 
-<p>这里的问题是Three.js希望canvas具有style.width和style.height属性。OffscreenCanvas，与DOM完全分离，没有它，因此您需要自己提供它，或者通过将其删除或提供将这些值与原始画布尺寸相关联的逻辑。</p>
-<p>这是一个如何在worker中运行基本Three.js动画的演示：</p>
+<p>这里的问题是 Three.js 希望 canvas 具有 style.width 和 style.height 属性。OffscreenCanvas，与 DOM 完全分离，没有它，因此您需要自己提供它，或者通过将其删除或提供将这些值与原始画布尺寸相关联的逻辑。</p>
+<p>这是一个如何在 worker 中运行基本 Three.js 动画的演示：</p>
 <p><img src="//kwongdroid.github.io/性能优化/OffscreenCanvas-使用Web-Worker加速您的Canvas操作/3.png" alt></p>
 <p><a href="https://devnook.github.io/OffscreenCanvasDemo/use-with-lib.html" target="_blank" rel="noopener">示例：use-with-lib</a></p>
-<p>请记住，某些与DOM相关的API在Worker中并不容易获得，因此如果您想使用更高级的Three.js功能（如纹理），则可能需要更多变通方法。</p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果您大量使用画布的图形功能，OffscreenCanvas可以积极影响您的应用程序的性能。使工作人员可以使用画布渲染上下文增加了Web应用程序的并行性，并更好地利用了多核系统。</p>
-<p>OffscreenCanvas在Chrome 69中没有标记。它也在 Firefox 中开发。由于其API与常规canvas元素非常一致，因此您可以轻松地对其进行特征检测并将其用作渐进增强，而不会破坏现有的应用程序或库逻辑。它在图形和动画与画布周围的DOM紧密相关的所有情况下都具有性能优势。</p>
+<p>请记住，某些与 DOM 相关的 API 在 Worker 中并不容易获得，因此如果您想使用更高级的 Three.js 功能（如纹理），则可能需要更多变通方法。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>如果您大量使用画布的图形功能，OffscreenCanvas 可以积极影响您的应用程序的性能。使工作人员可以使用画布渲染上下文增加了 Web 应用程序的并行性，并更好地利用了多核系统。</p>
+<p>OffscreenCanvas 在 Chrome 69 中没有标记。它也在 Firefox 中开发。由于其 API 与常规 canvas 元素非常一致，因此您可以轻松地对其进行特征检测并将其用作渐进增强，而不会破坏现有的应用程序或库逻辑。它在图形和动画与画布周围的 DOM 紧密相关的所有情况下都具有性能优势。</p>
 
       
     </div>
@@ -647,7 +655,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">12</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -672,7 +680,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">4</span>
+                      
+                    
+                    <span class="site-state-item-count">5</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -711,7 +721,15 @@
                     
                       
                     
-                    <span class="site-state-item-count">11</span>
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">15</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -780,7 +798,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在Worker中使用OffscreenCanvas"><span class="nav-number">1.</span> <span class="nav-text">在Worker中使用OffscreenCanvas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消阻止主线程"><span class="nav-number">2.</span> <span class="nav-text">取消阻止主线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与流行的库一起使用"><span class="nav-number">3.</span> <span class="nav-text">与流行的库一起使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#在-Worker-中使用-OffscreenCanvas"><span class="nav-number">1.</span> <span class="nav-text">在 Worker 中使用 OffscreenCanvas</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#取消阻止主线程"><span class="nav-number">2.</span> <span class="nav-text">取消阻止主线程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与流行的库一起使用"><span class="nav-number">3.</span> <span class="nav-text">与流行的库一起使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">4.</span> <span class="nav-text">结论</span></a></li></ol></div>
             
 
           </div>
@@ -821,6 +839,16 @@
 
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+
+  
+</div>
+
 
 
 
