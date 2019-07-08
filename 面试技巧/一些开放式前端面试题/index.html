@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar-180x180.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar-32x32.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar-16x16.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/avatar.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '7.2.0',
+    sidebar: {"position":"left","display":"always","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="你用 CSS 多久了？ 这个问题可以让面试官了解求职者使用 CSS 的经验。它还可以告诉面试官该人是否将该技能作为业余爱好或在学术或专业环境中学习。  我在高中时就开始用 CSS 了。当时我和一些朋友为我们喜欢的电视节目搭了一个网站。不过这些页面很差劲，因为它们没有统一的风格。每个页面的字体和颜色都不一样。后来我学会了 CSS，这样就可以很轻松的使页面风格统一。 你最喜欢的 CSS 功能是什么？">
+<meta name="keywords" content="JavaScript,面试,CSS,HTML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些开放式的前端面试题">
+<meta property="og:url" content="https://kwongdroid.github.io/面试技巧/一些开放式前端面试题/index.html">
+<meta property="og:site_name" content="落魄的前端开发">
+<meta property="og:description" content="你用 CSS 多久了？ 这个问题可以让面试官了解求职者使用 CSS 的经验。它还可以告诉面试官该人是否将该技能作为业余爱好或在学术或专业环境中学习。  我在高中时就开始用 CSS 了。当时我和一些朋友为我们喜欢的电视节目搭了一个网站。不过这些页面很差劲，因为它们没有统一的风格。每个页面的字体和颜色都不一样。后来我学会了 CSS，这样就可以很轻松的使页面风格统一。 你最喜欢的 CSS 功能是什么？">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-07-08T16:00:22.554Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些开放式的前端面试题">
+<meta name="twitter:description" content="你用 CSS 多久了？ 这个问题可以让面试官了解求职者使用 CSS 的经验。它还可以告诉面试官该人是否将该技能作为业余爱好或在学术或专业环境中学习。  我在高中时就开始用 CSS 了。当时我和一些朋友为我们喜欢的电视节目搭了一个网站。不过这些页面很差劲，因为它们没有统一的风格。每个页面的字体和颜色都不一样。后来我学会了 CSS，这样就可以很轻松的使页面风格统一。 你最喜欢的 CSS 功能是什么？">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://kwongdroid.github.io/面试技巧/一些开放式前端面试题/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>一些开放式的前端面试题 | 落魄的前端开发</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">落魄的前端开发</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">18</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">6</span></a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+      
+    
+
+    
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">13</span></a>
+
+  </li>
+
+      
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+  
+  
+
+  
+
+  <a href="https://github.com/kwongdroid" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://kwongdroid.github.io/面试技巧/一些开放式前端面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="kwongdroid">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="落魄的前端开发">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些开放式的前端面试题
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-19 23:41:21" itemprop="dateCreated datePublished" datetime="2019-06-19T23:41:21+08:00">2019-06-19</time>
+            </span>
+          
+
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/面试技巧/" itemprop="url" rel="index"><span itemprop="name">面试技巧</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+                 阅读次数： 
+                <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+              </span>
+            </span>
+          
+
+          <br>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="你用-CSS-多久了？"><a href="#你用-CSS-多久了？" class="headerlink" title="你用 CSS 多久了？"></a>你用 CSS 多久了？</h2><blockquote>
+<p>这个问题可以让面试官了解求职者使用 CSS 的经验。它还可以告诉面试官该人是否将该技能作为业余爱好或在学术或专业环境中学习。</p>
+</blockquote>
+<p>我在高中时就开始用 CSS 了。当时我和一些朋友为我们喜欢的电视节目搭了一个网站。不过这些页面很差劲，因为它们没有统一的风格。每个页面的字体和颜色都不一样。后来我学会了 CSS，这样就可以很轻松的使页面风格统一。</p>
+<h2 id="你最喜欢的-CSS-功能是什么？"><a href="#你最喜欢的-CSS-功能是什么？" class="headerlink" title="你最喜欢的 CSS 功能是什么？"></a>你最喜欢的 CSS 功能是什么？</h2><blockquote>
+<p>求职者最喜欢 CSS 的哪些功能并不重要。通过这个人是否能够熟练的地谈论 CSS，能够看出他 CSS 了解多少。</p>
+</blockquote>
+<p>我非常喜欢用 CSS 改变页面布局这个功能，因为这样可以适配不同的屏幕尺寸。现在有各种尺寸和形状的设备。如果你能正确的使用 CSS，在任何设备上访问你网站的体验都会很好，不管是用 iPhone 还是用 PC 浏览你的网站都没关系。</p>
+<h2 id="你有没有把-CSS-与其他语言结合使用？"><a href="#你有没有把-CSS-与其他语言结合使用？" class="headerlink" title="你有没有把 CSS 与其他语言结合使用？"></a>你有没有把 CSS 与其他语言结合使用？</h2><blockquote>
+<p>Web开发人员通常依赖好几种语言来构建动态网站。通过面试者的答案可以得知他都知道哪些开发语言。如果面试官单独提出某种语言，还可知道面试者对该语言的理解有多深。</p>
+</blockquote>
+<p>通常我用 CSS 来创建网站页面的总体布局并进行美化。另外我还将用 HTML 为页面提供一些结构。当我需要向网站添加交互式元素、动画、音乐或其他功能时，更喜欢使用 JavaScript，因为它能够很方便的实现一些逻辑。</p>
+<h2 id="你能告诉我一个让你学到新-CSS-技术的项目吗？"><a href="#你能告诉我一个让你学到新-CSS-技术的项目吗？" class="headerlink" title="你能告诉我一个让你学到新 CSS 技术的项目吗？"></a>你能告诉我一个让你学到新 CSS 技术的项目吗？</h2><blockquote>
+<p>这个问题鼓励面试者反思他们使用CSS的经历。答案可能会揭示一些事情，例如面试者对 CSS 有多少经验，以及他们如何使用批判性思维来解决困难问题。</p>
+</blockquote>
+<p>我在大学里做过一个项目，这个项目能帮助图书管理员和工程师团队对内容进行数字化。我的小团队打算把图书馆里收藏的大量手写诗集数字化。花费精力最多的一个功能是：写了一个能够容纳各种大小和形状的诗词稿件的样式。</p>
+<h2 id="你最喜欢的一个项目是什么？"><a href="#你最喜欢的一个项目是什么？" class="headerlink" title="你最喜欢的一个项目是什么？"></a>你最喜欢的一个项目是什么？</h2><blockquote>
+<p>通过这个问题可以深入了解求职者的经验。答案更多地揭示了求职者的个性而不是编程技巧。</p>
+</blockquote>
+<p>我帮一位朋友写了一个发布文章、照片、音乐和各种媒体的在线杂志，这个项目并不难，几个小时后，他的网站从 OK 变为优秀。它让我想起为什么了解 CSS，JavaScript 和其他常用语言非常重要。如果没有一个好的网站来展示它，你所做的都没有什么意义。</p>
+<h2 id="当你忘记某个-CSS-的功能时，是怎么解决的？"><a href="#当你忘记某个-CSS-的功能时，是怎么解决的？" class="headerlink" title="当你忘记某个 CSS 的功能时，是怎么解决的？"></a>当你忘记某个 CSS 的功能时，是怎么解决的？</h2><blockquote>
+<p>程序员不能把所有东西都放在脑子里，所以当他们能想起特定的功能和术语时，会依赖一些资源。这个问题的答案能够知道求职者有没有可靠的资源，这些资源在未来开展项目时可能会派上用场。</p>
+</blockquote>
+<p>Mozilla开发者网络，简称 MDN，为我节省了大量的时间。这是一个在线资源，其中包含有 CSS、HTML和JavaScript 的资料。我也喜欢 w3schools.com 上的 CSS 教程。</p>
+<h2 id="你最不喜欢-CSS-的哪些东西？"><a href="#你最不喜欢-CSS-的哪些东西？" class="headerlink" title="你最不喜欢 CSS 的哪些东西？"></a>你最不喜欢 CSS 的哪些东西？</h2><blockquote>
+<p>所有人都有不喜欢的工作。对这个问题的诚实回答可以帮助面试官为求职者提供合适的团队。例如，如果一个人喜欢在 CSS 文件中发现错误，那么你可能希望聘请这个人与一个喜欢专注于大局的创意人一起工作。</p>
+</blockquote>
+<p>CSS 使网页设计变得更加容易，但它仍然感觉有点单调乏味。理想情况下，我想用动态语言让用户与网站进行互动。但就目前而言，我很乐意磨练自己的 CSS 技能并向更有经验的人学习。??下，我想用动态语言让用户与网站进行互动。但就目前而言，我很乐意磨练自己的 CSS 技能并向更有经验的人学习。</p>
+<h2 id="你能不能用纯-HTML-写出页面？"><a href="#你能不能用纯-HTML-写出页面？" class="headerlink" title="你能不能用纯 HTML 写出页面？"></a>你能不能用纯 HTML 写出页面？</h2><blockquote>
+<p>有许多无需深入掌握 HTML 就能做出页面的工具。这个问题询问求职者，当他们可以借助一些工具生成页面时，对 HTML 还有多大的兴趣。</p>
+</blockquote>
+<p>网站构建工具非常适合外行和专业开发人员，但我认为了解底层技术非常重要，因此我可以更好地控制网站的外观和行为。例如，当我使用 WordPress 构建网站时，发现通过插入自己的 HTML 而不是依赖提供的工具，可以得到更好的结果。</p>
+<h2 id="你还知道哪些其他语言？"><a href="#你还知道哪些其他语言？" class="headerlink" title="你还知道哪些其他语言？"></a>你还知道哪些其他语言？</h2><blockquote>
+<p>今天的网站通常依赖于HTML，层叠样式表（CSS）和JavaScript。一个优秀的网站开发人员应该能够熟练使用这些语言。</p>
+</blockquote>
+<p>在我开发更大的网站时，习了CSS，因此我不必手动更新每个页面的外观。我也有一些 JavaScript 经验。我只知道基本功能，但我可以使用它们来使网站更有用和互动。我一直在观看教程，以使我的 JavaScript 功能更强大。</p>
+<h2 id="你将如何帮助我们的内容团队获得更好的搜索引擎结果？"><a href="#你将如何帮助我们的内容团队获得更好的搜索引擎结果？" class="headerlink" title="你将如何帮助我们的内容团队获得更好的搜索引擎结果？"></a>你将如何帮助我们的内容团队获得更好的搜索引擎结果？</h2><blockquote>
+<p>理想情况下，你需要一位了解搜索引擎友好重要性的 HTML 专家。这个问题能够解释求职者是否理解良好的 HTML 对搜索引擎的重要性，以及在搜索引擎结果页面（SERP）上获得更好的排名方面可以发挥的作用。</p>
+</blockquote>
+<p>我想做几件事来确保你的网站获得最高排名。我首先要创建一个帮助搜索引擎蜘蛛浏览网站的站点地图。接下来，我会检查每个页面以确保它使用有用的标签，包括标题标签。最后，我会使用链接检查器找到网站上失效的链接。</p>
+<h2 id="对你来说，创建一个新网站最困难的部分是什么？"><a href="#对你来说，创建一个新网站最困难的部分是什么？" class="headerlink" title="对你来说，创建一个新网站最困难的部分是什么？"></a>对你来说，创建一个新网站最困难的部分是什么？</h2><blockquote>
+<p>了解申请人的优缺点非常重要。这个问题让面试官有机会了解潜在员工对工作难以胜任的部分。面试官可能需要考虑这种弱点对团队的影响。</p>
+</blockquote>
+<p>我对规划阶段感到非常沮丧。准确了解网站的外观会告诉我如何构建网站。我对这部分有点迷恋，因为我希望网站看起来尽可能完美。</p>
+<h2 id="你最喜欢HTML5的哪些功能？"><a href="#你最喜欢HTML5的哪些功能？" class="headerlink" title="你最喜欢HTML5的哪些功能？"></a>你最喜欢HTML5的哪些功能？</h2><blockquote>
+<p>HTML5 是 HTML 的最新版本。通过提出这个问题，面试官可以发现求职者是否了解构建网站时使用的最新元素和属性。此问题还可以用来确定求职者对技术的热情。</p>
+</blockquote>
+<p>今天的互联网用户希望找到包含视频、音乐和动画的多媒体内容。 HTML5 为最新的多媒体文件提供了更稳定的环境。我最喜欢的是可以向网站添加多媒体内容，而不必担心网站会崩溃或拒绝播放内容。</p>
+<h2 id="你如何改进我们公司当前的网站？"><a href="#你如何改进我们公司当前的网站？" class="headerlink" title="你如何改进我们公司当前的网站？"></a>你如何改进我们公司当前的网站？</h2><blockquote>
+<p>这是一个重要的问题，测试求职者的技术知识和批判性思维技能。它还能揭示求职者在面试前是否花时间研究你的业务。寻找解决用户体验、布局和其他功能的深思熟虑的答案。你不必同意求职者的意见，但你应该找到提议背后的逻辑。</p>
+</blockquote>
+<p>我认为该网站的布局很好，使访问者可以轻松找到他们需要的内容和产品。另一方面，我不喜欢当访问主页时视频自动开始播放。我会禁用自动播放功能，让访问者点击播放按钮。</p>
+<h2 id="你想在未来几年内开发哪些类型的项目？"><a href="#你想在未来几年内开发哪些类型的项目？" class="headerlink" title="你想在未来几年内开发哪些类型的项目？"></a>你想在未来几年内开发哪些类型的项目？</h2><blockquote>
+<p>这个问题的答案让你对求职者的职业规划有所了解。它还展示了人们感兴趣的挑战类型。面试官可能会发现自己公司的计划与未来员工的职业目标是否保持一致。</p>
+</blockquote>
+<p>我对开发交互式网站和应用感兴趣，因此我一直在学习更多有关 JavaScript、Ruby on Rails、Swift、React 和变得越来越重要的知识。理想情况下，我想开发一个将 VR 整合到网站或应用中的项目。</p>
+<h2 id="如何保证你的网站或-Web-应用的可访问性？"><a href="#如何保证你的网站或-Web-应用的可访问性？" class="headerlink" title="如何保证你的网站或 Web 应用的可访问性？"></a>如何保证你的网站或 Web 应用的可访问性？</h2><blockquote>
+<p>前端开发人员在为最终用户设计体验时需要充分掌控其可用性和可访问性。这个问题让面试官知道求职者对这些标准和最佳实践的了解。</p>
+</blockquote>
+<p>我在各种浏览器和设备上测试我的 Web 应用，检查在所有设备上的体验是否可用。我还使用流行的屏幕阅读软件和其他辅助解决方案来查看是否所有潜在用户都可以访问它。</p>
+<h2 id="你最喜欢-HTML5-的哪些功能，以及如何在前端项目中实现？"><a href="#你最喜欢-HTML5-的哪些功能，以及如何在前端项目中实现？" class="headerlink" title="你最喜欢 HTML5 的哪些功能，以及如何在前端项目中实现？"></a>你最喜欢 HTML5 的哪些功能，以及如何在前端项目中实现？</h2><blockquote>
+<p>前端开发会在 HTML5 上花费大量时间，他们整合 Web 设计并实现各种功能，从而节省开发时间并改进最终产品。</p>
+</blockquote>
+<p>与以前的版本相比，我喜欢 HTML5 对多媒体的支持。我使用此功能开发时，会把视频和音频作为用户体验的重要组成部分，而不必担心它无法正确加载或破坏页面。</p>
+<h2 id="如何对-CSS-和-JavaScript-代码进行组织，以使其他开发人员更容易使用？"><a href="#如何对-CSS-和-JavaScript-代码进行组织，以使其他开发人员更容易使用？" class="headerlink" title="如何对 CSS 和 JavaScript 代码进行组织，以使其他开发人员更容易使用？"></a>如何对 CSS 和 JavaScript 代码进行组织，以使其他开发人员更容易使用？</h2><blockquote>
+<p>前端开发人员经常会处理由以前的员工创建的代码，或作为团队的一员工作。这个问题让面试官了解求职者能不能创建其他员工可以理解的网站或 Web 应用。</p>
+</blockquote>
+<p>我把站点的每个组件都分拆出了独立的代码。每个代码片段都有注释，以便其他开发人员可以更改它。</p>
+<h2 id="你能解释一下-CSS-float-的概念并举例吗？"><a href="#你能解释一下-CSS-float-的概念并举例吗？" class="headerlink" title="你能解释一下 CSS float 的概念并举例吗？"></a>你能解释一下 CSS float 的概念并举例吗？</h2><blockquote>
+<p>该技术问题考察面试者对常见 CSS 元素的理解。这个问题用来筛选求职者，并确保他们不只是能够熟练使用 CSS 的好办法。</p>
+</blockquote>
+<p>CSS float 告诉浏览器将特定元素放在容器的右侧或左侧。当我开发基于用户分辨率动态调整大小的页面时，使用float。</p>
+<h2 id="你是怎样处理特定浏览器的渲染问题的？你是否发现某个浏览器比其他浏览器更具挑战性？"><a href="#你是怎样处理特定浏览器的渲染问题的？你是否发现某个浏览器比其他浏览器更具挑战性？" class="headerlink" title="你是怎样处理特定浏览器的渲染问题的？你是否发现某个浏览器比其他浏览器更具挑战性？"></a>你是怎样处理特定浏览器的渲染问题的？你是否发现某个浏览器比其他浏览器更具挑战性？</h2><blockquote>
+<p>基于每个浏览器的渲染的方式，前端开发人员必须将特定于浏览器的 hack 引入Web 应用和页面。对于求职者来说，这个常见的过程应该是比较熟悉的。</p>
+</blockquote>
+<p>我经常需要修改 Microsoft Edge 网页上的 DIV 位置。对于我来说，这个浏览器是最有问题的，因为我几乎不会在 Chrome 或 Firefox 上遇到这类问题。</p>
+<h2 id="你通过哪些途径来了解最新的前端技术？"><a href="#你通过哪些途径来了解最新的前端技术？" class="headerlink" title="你通过哪些途径来了解最新的前端技术？"></a>你通过哪些途径来了解最新的前端技术？</h2><blockquote>
+<p>前端开发中的技术和标准在不断变化。拥有“持续学习”能力的求职者可以通过不断的学习，来获取改进开发过程和改善最终用户体验的方法。</p>
+</blockquote>
+<p>我有订阅了几个前端开发方面的杂志，并经常访问 Stack Overflow 论坛。这些资源帮助我了解前端开发的最新技术。</p>
+<h2 id="你最喜欢的前端项目是什么？为什么？"><a href="#你最喜欢的前端项目是什么？为什么？" class="headerlink" title="你最喜欢的前端项目是什么？为什么？"></a>你最喜欢的前端项目是什么？为什么？</h2><blockquote>
+<p>这个问题可让面试官深入了解前端开发人员的个人偏好。一些求职者可能更倾向网站项目，而其他人更喜欢参与Web 应用团队。</p>
+</blockquote>
+<p>我最近为当地医院开发了一个网络应用。它简化了患者的求医过程，当我知道自己的工作能帮助患者更快地获得所需的帮助时非常开心。</p>
+<h2 id="单体应用和微服务架构之间有哪些主要区别，从灵活性和可扩展性的角度来看，哪个是更好选择？"><a href="#单体应用和微服务架构之间有哪些主要区别，从灵活性和可扩展性的角度来看，哪个是更好选择？" class="headerlink" title="单体应用和微服务架构之间有哪些主要区别，从灵活性和可扩展性的角度来看，哪个是更好选择？"></a>单体应用和微服务架构之间有哪些主要区别，从灵活性和可扩展性的角度来看，哪个是更好选择？</h2><blockquote>
+<p>这个问题用来评估基础编码知识。答案可以有多种，所以应该注意倾听具体的问题，并尽量全面回答，来展示自己对单体应用与微服务架构的理解。</p>
+</blockquote>
+<p>设计单体架构在短期内成本较低，但代码在内存是单一的内聚单元。微服务架构提供了灵活性和可扩展性，因为每个组件都是一个独立的程序。</p>
+<h2 id="同步和异步编程有什么区别，异步编程与你的-JavaScript-工作有什么关系？"><a href="#同步和异步编程有什么区别，异步编程与你的-JavaScript-工作有什么关系？" class="headerlink" title="同步和异步编程有什么区别，异步编程与你的 JavaScript 工作有什么关系？"></a>同步和异步编程有什么区别，异步编程与你的 JavaScript 工作有什么关系？</h2><blockquote>
+<p>异步编程允许多个并发操作，并且它非常适合 JavaScript 程序。这个问题评用来估求职者的编码知识，以及对 JavaScript 的具体理解。</p>
+</blockquote>
+<p>简单来说，同步编程意味着代码以线性方式执行。这些程序通常不能同时处理多个操作。使用异步编程，有一个事件循环。一个程序线程可以处理多个操作。由于 JavaScript 通常用于用户界面，因此同时运行多个操作的能力可以带来更好的用户体验。</p>
+<h2 id="你是否在-JavaScript-中使用过类继承和原型继承？为什么？"><a href="#你是否在-JavaScript-中使用过类继承和原型继承？为什么？" class="headerlink" title="你是否在 JavaScript 中使用过类继承和原型继承？为什么？"></a>你是否在 JavaScript 中使用过类继承和原型继承？为什么？</h2><blockquote>
+<p>这个问题有助于了解求职者是否具有 JavaScript 经验和专业知识。原型继承比类继承更容易、更灵活，这是判断一个有经验的 JavaScript 程序员的首选方法。</p>
+</blockquote>
+<p>当使用类继承时，实例继承自类，这会产生分层。而通过原型继承，实例继承自其他对象，并且可以从多个对象创建。我更喜欢原型继承，因为它更简单、更灵活。</p>
+<h2 id="在你看来，类继承是否是正确的选择？如果是的话，是在什么情况下？如果不是，为什么？"><a href="#在你看来，类继承是否是正确的选择？如果是的话，是在什么情况下？如果不是，为什么？" class="headerlink" title="在你看来，类继承是否是正确的选择？如果是的话，是在什么情况下？如果不是，为什么？"></a>在你看来，类继承是否是正确的选择？如果是的话，是在什么情况下？如果不是，为什么？</h2><blockquote>
+<p>求职者的答案能让面试官深入了解他们使用 JavaScript 的经历。类继承有意义的情况很少，求职者可能会说根本没有。 否定的答案优于对适当情况冗长的描述，因为这些通常是基于错误信息的。</p>
+</blockquote>
+<p>类继承几乎从来都不是正确的解决方案。只有在极少数情况下，它可能被用到。</p>
+<h2 id="你如何定义函数式编程？函数式编程在-JavaScript-中的作用是什么？"><a href="#你如何定义函数式编程？函数式编程在-JavaScript-中的作用是什么？" class="headerlink" title="你如何定义函数式编程？函数式编程在 JavaScript 中的作用是什么？"></a>你如何定义函数式编程？函数式编程在 JavaScript 中的作用是什么？</h2><blockquote>
+<p>函数式编程是目前 JavaScript 使用的基本原则。求职者是否能够完整的回答这个问题，可以证明他们的基础知识是否扎实。</p>
+</blockquote>
+<p>函数式编程允许通过使用纯函数来设计软件。此方法避免了很多编程问题，如共享状态，副作用和可变数据。它作为面向对象编程的替代方案，其中应用状态通常与对象中的方法搭配并共享。</p>
+<h2 id="使用函数式编程方法而不是面向对象编程有什么好处？你能提供一个例子吗？"><a href="#使用函数式编程方法而不是面向对象编程有什么好处？你能提供一个例子吗？" class="headerlink" title="使用函数式编程方法而不是面向对象编程有什么好处？你能提供一个例子吗？"></a>使用函数式编程方法而不是面向对象编程有什么好处？你能提供一个例子吗？</h2><blockquote>
+<p>任何具有 JavaScript 经验的求职者都会使用其中一种风格，因此应该能够对每种风格的优缺点提出一些看法。这个问题可以帮助面试官衡量求职者使用 JavaScript 的深度。</p>
+</blockquote>
+<p>虽然我主要使用面向对象编程方式，但是我更希望用函数式编程开发。在用面向对象编程时遇到不同的组件竞争相同的资源的时候，更是如此。</p>
+<h2 id="你如何定义单向数据流和双向数据绑定？两者有什么区别？"><a href="#你如何定义单向数据流和双向数据绑定？两者有什么区别？" class="headerlink" title="你如何定义单向数据流和双向数据绑定？两者有什么区别？"></a>你如何定义单向数据流和双向数据绑定？两者有什么区别？</h2><blockquote>
+<p>这个问题能够说明求职者对 JavaScript 重要基本原则的深刻理解。不熟悉这些条款的求职者可能没有该职位所需的经验。</p>
+</blockquote>
+<p>当模型是单一事实来源时，会发生单向数据流，React 就是一个例子。双向数据绑定是用户界面与模型数据动态链接的状态。如果用户界面中的字段发生了变化，模型也会发生变化，比如 Angular。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+      <div>
+        
+
+
+
+
+  
+
+
+
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>kwongdroid</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    
+    <a href="https://kwongdroid.github.io/面试技巧/一些开放式前端面试题/" title="一些开放式的前端面试题">https://kwongdroid.github.io/面试技巧/一些开放式前端面试题/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/面试/" rel="tag"><i class="fa fa-tag"></i> 面试</a>
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+            <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/前端笔记/数据结构与算法/经典排序算法的ES6实现（动画演示）/" rel="next" title="经典排序算法的ES6实现（动画演示）">
+                <i class="fa fa-chevron-left"></i> 经典排序算法的ES6实现（动画演示）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="kwongdroid">
+            
+              <p class="site-author-name" itemprop="name">kwongdroid</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/kwongdroid" title="GitHub &rarr; https://github.com/kwongdroid" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="mailto:kwongdroid@qq.com" title="E-Mail &rarr; mailto:kwongdroid@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                  
+                    
+                  
+                  <a href="https://weibo.com/kwongdroid" title="Weibo &rarr; https://weibo.com/kwongdroid" rel="noopener" target="_blank"><i class="fa fa-fw fa-weibo"></i></a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#你用-CSS-多久了？"><span class="nav-number">1.</span> <span class="nav-text">你用 CSS 多久了？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你最喜欢的-CSS-功能是什么？"><span class="nav-number">2.</span> <span class="nav-text">你最喜欢的 CSS 功能是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你有没有把-CSS-与其他语言结合使用？"><span class="nav-number">3.</span> <span class="nav-text">你有没有把 CSS 与其他语言结合使用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你能告诉我一个让你学到新-CSS-技术的项目吗？"><span class="nav-number">4.</span> <span class="nav-text">你能告诉我一个让你学到新 CSS 技术的项目吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你最喜欢的一个项目是什么？"><span class="nav-number">5.</span> <span class="nav-text">你最喜欢的一个项目是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#当你忘记某个-CSS-的功能时，是怎么解决的？"><span class="nav-number">6.</span> <span class="nav-text">当你忘记某个 CSS 的功能时，是怎么解决的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你最不喜欢-CSS-的哪些东西？"><span class="nav-number">7.</span> <span class="nav-text">你最不喜欢 CSS 的哪些东西？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你能不能用纯-HTML-写出页面？"><span class="nav-number">8.</span> <span class="nav-text">你能不能用纯 HTML 写出页面？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你还知道哪些其他语言？"><span class="nav-number">9.</span> <span class="nav-text">你还知道哪些其他语言？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你将如何帮助我们的内容团队获得更好的搜索引擎结果？"><span class="nav-number">10.</span> <span class="nav-text">你将如何帮助我们的内容团队获得更好的搜索引擎结果？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对你来说，创建一个新网站最困难的部分是什么？"><span class="nav-number">11.</span> <span class="nav-text">对你来说，创建一个新网站最困难的部分是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你最喜欢HTML5的哪些功能？"><span class="nav-number">12.</span> <span class="nav-text">你最喜欢HTML5的哪些功能？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你如何改进我们公司当前的网站？"><span class="nav-number">13.</span> <span class="nav-text">你如何改进我们公司当前的网站？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你想在未来几年内开发哪些类型的项目？"><span class="nav-number">14.</span> <span class="nav-text">你想在未来几年内开发哪些类型的项目？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何保证你的网站或-Web-应用的可访问性？"><span class="nav-number">15.</span> <span class="nav-text">如何保证你的网站或 Web 应用的可访问性？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你最喜欢-HTML5-的哪些功能，以及如何在前端项目中实现？"><span class="nav-number">16.</span> <span class="nav-text">你最喜欢 HTML5 的哪些功能，以及如何在前端项目中实现？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何对-CSS-和-JavaScript-代码进行组织，以使其他开发人员更容易使用？"><span class="nav-number">17.</span> <span class="nav-text">如何对 CSS 和 JavaScript 代码进行组织，以使其他开发人员更容易使用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你能解释一下-CSS-float-的概念并举例吗？"><span class="nav-number">18.</span> <span class="nav-text">你能解释一下 CSS float 的概念并举例吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你是怎样处理特定浏览器的渲染问题的？你是否发现某个浏览器比其他浏览器更具挑战性？"><span class="nav-number">19.</span> <span class="nav-text">你是怎样处理特定浏览器的渲染问题的？你是否发现某个浏览器比其他浏览器更具挑战性？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你通过哪些途径来了解最新的前端技术？"><span class="nav-number">20.</span> <span class="nav-text">你通过哪些途径来了解最新的前端技术？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你最喜欢的前端项目是什么？为什么？"><span class="nav-number">21.</span> <span class="nav-text">你最喜欢的前端项目是什么？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单体应用和微服务架构之间有哪些主要区别，从灵活性和可扩展性的角度来看，哪个是更好选择？"><span class="nav-number">22.</span> <span class="nav-text">单体应用和微服务架构之间有哪些主要区别，从灵活性和可扩展性的角度来看，哪个是更好选择？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#同步和异步编程有什么区别，异步编程与你的-JavaScript-工作有什么关系？"><span class="nav-number">23.</span> <span class="nav-text">同步和异步编程有什么区别，异步编程与你的 JavaScript 工作有什么关系？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你是否在-JavaScript-中使用过类继承和原型继承？为什么？"><span class="nav-number">24.</span> <span class="nav-text">你是否在 JavaScript 中使用过类继承和原型继承？为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在你看来，类继承是否是正确的选择？如果是的话，是在什么情况下？如果不是，为什么？"><span class="nav-number">25.</span> <span class="nav-text">在你看来，类继承是否是正确的选择？如果是的话，是在什么情况下？如果不是，为什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你如何定义函数式编程？函数式编程在-JavaScript-中的作用是什么？"><span class="nav-number">26.</span> <span class="nav-text">你如何定义函数式编程？函数式编程在 JavaScript 中的作用是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用函数式编程方法而不是面向对象编程有什么好处？你能提供一个例子吗？"><span class="nav-number">27.</span> <span class="nav-text">使用函数式编程方法而不是面向对象编程有什么好处？你能提供一个例子吗？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#你如何定义单向数据流和双向数据绑定？两者有什么区别？"><span class="nav-number">28.</span> <span class="nav-text">你如何定义单向数据流和双向数据绑定？两者有什么区别？</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 – <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">kwongdroid</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+  
+  <script color="255,0,0" opacity="0.8" zindex="-1" count="66" src="/lib/canvas-nest/canvas-nest-nomobile.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/click-heart.js"></script>
+</body>
+</html>
